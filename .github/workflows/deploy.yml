@@ -26,3 +26,4 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         source: "build/*"
         target: "/var/www/akhmadjon/data/www/theuzsoft.uz"
+        overwrite: true
