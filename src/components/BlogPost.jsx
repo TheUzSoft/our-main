@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { fetchBlogBySlug, extractTextFromHTML } from '../utils/blogApi';
 import uzBlogs from '../../data/blogs/uz.json';
 import ruBlogs from '../../data/blogs/ru.json';
 
@@ -11,19 +12,57 @@ const BlogPost = () => {
   const { lang } = useParams();
   const navigate = useNavigate();
   const [blog, setBlog] = useState(null);
-  const [notFound, setNotFound] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Load blog based on current language
-    const currentLang = lang || language;
-    const blogData = currentLang === 'ru' ? ruBlogs : uzBlogs;
-    const foundBlog = blogData.find((b) => b.slug === slug);
-    
-    if (foundBlog) {
-      setBlog(foundBlog);
-      setNotFound(false);
-    } else {
-      setNotFound(true);
+    const loadBlog = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const currentLang = lang || language;
+        
+        // Try to fetch from API first
+        try {
+          const blogData = await fetchBlogBySlug(slug, currentLang);
+          if (blogData) {
+            setBlog(blogData);
+            setLoading(false);
+            return;
+          }
+        } catch (apiError) {
+          console.warn('API failed, using fallback JSON:', apiError);
+        }
+        
+        // Fallback to JSON files if API fails
+        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
+        const foundBlog = fallbackData.find((b) => b.slug === slug);
+        
+        if (foundBlog) {
+          setBlog(foundBlog);
+        } else {
+          setError('not_found');
+        }
+      } catch (err) {
+        console.error('Failed to load blog:', err);
+        // Try JSON fallback before showing error
+        const currentLang = lang || language;
+        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
+        const foundBlog = fallbackData.find((b) => b.slug === slug);
+        
+        if (foundBlog) {
+          setBlog(foundBlog);
+          setError(null);
+        } else {
+          setError('not_found');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slug) {
+      loadBlog();
     }
   }, [slug, lang, language]);
 
@@ -36,8 +75,8 @@ const BlogPost = () => {
       // Title
       document.title = `${blog.title} | TheUzSoft`;
       
-      // Description - first 150 characters of content
-      const description = blog.content.replace(/\n\n/g, ' ').substring(0, 150).trim() + '...';
+      // Description - extract from HTML content
+      const description = blog.short || extractTextFromHTML(blog.content || '', 150);
       
       let metaDescription = document.querySelector('meta[name="description"]');
       if (!metaDescription) {
@@ -58,11 +97,15 @@ const BlogPost = () => {
         tag.setAttribute('content', content);
       };
 
+      const ogImage = blog.cover_image 
+        ? (blog.cover_image.startsWith('http') ? blog.cover_image : `https://api.theuzsoft.uz${blog.cover_image}`)
+        : `${baseUrl}/logo.png`;
+
       updateOGTag('og:title', `${blog.title} | TheUzSoft`);
       updateOGTag('og:description', description);
       updateOGTag('og:type', 'article');
       updateOGTag('og:url', `${baseUrl}/${currentLang}/blog/${slug}`);
-      updateOGTag('og:image', `${baseUrl}/logo.png`);
+      updateOGTag('og:image', ogImage);
       updateOGTag('og:locale', currentLang === 'uz' ? 'uz_UZ' : 'ru_RU');
 
       // Update canonical
@@ -73,39 +116,25 @@ const BlogPost = () => {
         document.head.appendChild(canonical);
       }
       canonical.setAttribute('href', `${baseUrl}/${currentLang}/blog/${slug}`);
-
-      // Update alternate language links
-      const updateAlternate = (hreflang, href) => {
-        let alternate = document.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`);
-        if (!alternate) {
-          alternate = document.createElement('link');
-          alternate.setAttribute('rel', 'alternate');
-          alternate.setAttribute('hreflang', hreflang);
-          document.head.appendChild(alternate);
-        }
-        alternate.setAttribute('href', href);
-      };
-
-      // Find corresponding blog in other language
-      const otherLangData = currentLang === 'ru' ? uzBlogs : ruBlogs;
-      const correspondingBlog = otherLangData.find((b) => {
-        // Try to match by similar slug or title
-        return b.title.toLowerCase().includes(blog.title.split(' ')[0].toLowerCase()) ||
-               blog.title.toLowerCase().includes(b.title.split(' ')[0].toLowerCase());
-      });
-
-      if (correspondingBlog) {
-        const otherLang = currentLang === 'ru' ? 'uz' : 'ru';
-        updateAlternate(currentLang, `${baseUrl}/${currentLang}/blog/${slug}`);
-        updateAlternate(otherLang, `${baseUrl}/${otherLang}/blog/${correspondingBlog.slug}`);
-      } else {
-        updateAlternate(currentLang, `${baseUrl}/${currentLang}/blog/${slug}`);
-        updateAlternate('x-default', `${baseUrl}/uz/blog/${slug}`);
-      }
     }
   }, [blog, slug, lang, language]);
 
-  if (notFound) {
+  // Loading state
+  if (loading) {
+    return (
+      <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center pt-32 md:pt-40">
+        <div className="container mx-auto text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            {language === 'uz' ? 'Yuklanmoqda...' : 'Загрузка...'}
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error === 'not_found' || (!blog && !loading)) {
     return (
       <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center pt-32 md:pt-40">
         <div className="container mx-auto text-center">
@@ -128,20 +157,46 @@ const BlogPost = () => {
     );
   }
 
-  if (!blog) {
+  if (error) {
     return (
       <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center pt-32 md:pt-40">
         <div className="container mx-auto text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <h2 className="text-2xl font-bold text-black dark:text-white mb-4">
+            {language === 'uz' ? 'Xatolik yuz berdi' : 'Произошла ошибка'}
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors mr-4"
+          >
+            {language === 'uz' ? 'Qayta urinish' : 'Попробовать снова'}
+          </button>
+          <Link
+            to={`/${lang || language}/blog`}
+            className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          >
+            {language === 'uz' ? 'Blogga qaytish' : 'Вернуться в блог'}
+          </Link>
         </div>
       </section>
     );
   }
 
+  if (!blog) {
+    return null;
+  }
+
+  // Get cover image URL
+  const coverImageUrl = blog.cover_image 
+    ? (blog.cover_image.startsWith('http') 
+        ? blog.cover_image 
+        : `https://api.theuzsoft.uz${blog.cover_image}`)
+    : null;
+
   return (
     <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24">
-      <div className="container mx-auto max-w-3xl">
-        {/* Back Button - Fixed spacing to avoid header overlap */}
+      <div className="container mx-auto max-w-4xl">
+        {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -170,11 +225,13 @@ const BlogPost = () => {
           className="bg-white dark:bg-[#14151b]"
         >
           {/* Category Badge */}
-          <div className="mb-6">
-            <span className="inline-block px-4 py-2 text-sm font-semibold text-primary bg-primary/10 rounded-full">
-              {blog.category}
-            </span>
-          </div>
+          {blog.category && (
+            <div className="mb-6">
+              <span className="inline-block px-4 py-2 text-sm font-semibold text-primary bg-primary/10 rounded-full">
+                {blog.category}
+              </span>
+            </div>
+          )}
 
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-inter text-black dark:text-white mb-6 tracking-tight leading-tight">
@@ -182,28 +239,50 @@ const BlogPost = () => {
           </h1>
 
           {/* Duration */}
-          <div className="mb-10 pb-6 border-b border-gray-200 dark:border-gray-700">
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-              {blog.duration}
-            </p>
-          </div>
+          {blog.duration && (
+            <div className="mb-10 pb-6 border-b border-gray-200 dark:border-gray-700">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                {blog.duration}
+              </p>
+            </div>
+          )}
 
-          {/* Content - Improved typography */}
-          <div className="prose prose-lg max-w-none mb-12">
+          {/* Cover Image */}
+          {coverImageUrl && (
+            <div className="mb-10">
+              <img
+                src={coverImageUrl}
+                alt={blog.title}
+                className="w-full h-auto rounded-xl object-cover"
+                loading="lazy"
+              />
+            </div>
+          )}
+
+          {/* Content - HTML or Plain Text */}
+          {blog.content && (
             <div 
-              className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-white leading-relaxed whitespace-pre-line space-y-6"
+              className="prose prose-lg max-w-none mb-12 dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-primary prose-img:rounded-xl"
               style={{
                 lineHeight: '1.8',
                 letterSpacing: '0.01em'
               }}
             >
-              {blog.content.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="mb-6 last:mb-0">
-                  {paragraph.trim()}
-                </p>
-              ))}
+              {/* Check if content contains HTML tags */}
+              {blog.content.includes('<') && blog.content.includes('>') ? (
+                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+              ) : (
+                // Plain text content - split by paragraphs
+                <div className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-white leading-relaxed whitespace-pre-line space-y-6">
+                  {blog.content.split('\n\n').map((paragraph, index) => (
+                    <p key={index} className="mb-6 last:mb-0">
+                      {paragraph.trim()}
+                    </p>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          )}
 
           {/* CTA Section */}
           <motion.div
@@ -212,7 +291,7 @@ const BlogPost = () => {
             transition={{ duration: 0.3, delay: 0.2 }}
             className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700"
           >
-            <div className="bg-gray-50 dark:bg-[#14151b] rounded-xl p-6 sm:p-8">
+            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 sm:p-8">
               <h3 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
                 {language === 'uz' 
                   ? 'Loyihangizni boshlashga tayyormisiz?' 

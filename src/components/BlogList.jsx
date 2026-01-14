@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { fetchBlogs, extractTextFromHTML, sortBlogsByDate } from '../utils/blogApi';
 import uzBlogs from '../../data/blogs/uz.json';
 import ruBlogs from '../../data/blogs/ru.json';
 
@@ -9,12 +10,49 @@ const BlogList = () => {
   const { language, t } = useLanguage();
   const { lang } = useParams();
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Load blogs based on current language
-    const currentLang = lang || language;
-    const blogData = currentLang === 'ru' ? ruBlogs : uzBlogs;
-    setBlogs(blogData);
+    const loadBlogs = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const currentLang = lang || language;
+        
+        // Try to fetch from API first
+        try {
+          const blogData = await fetchBlogs(currentLang);
+          if (blogData && blogData.length > 0) {
+            // Sort blogs by date (newest first)
+            const sortedBlogs = sortBlogsByDate(blogData);
+            setBlogs(sortedBlogs);
+            setLoading(false);
+            return;
+          }
+        } catch (apiError) {
+          console.warn('API failed, using fallback JSON:', apiError);
+        }
+        
+        // Fallback to JSON files if API fails or returns empty
+        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
+        // Sort fallback data too (by id, assuming higher id = newer)
+        const sortedFallback = sortBlogsByDate(fallbackData || []);
+        setBlogs(sortedFallback);
+      } catch (err) {
+        console.error('Failed to load blogs:', err);
+        // Even if everything fails, try JSON fallback
+        const currentLang = lang || language;
+        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
+        const sortedFallback = sortBlogsByDate(fallbackData || []);
+        setBlogs(sortedFallback);
+        setError(null); // Don't show error, use fallback
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlogs();
   }, [lang, language]);
 
   // Update SEO meta tags
@@ -87,10 +125,44 @@ const BlogList = () => {
     },
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24 flex items-center justify-center">
+        <div className="container mx-auto text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            {language === 'uz' ? 'Yuklanmoqda...' : 'Загрузка...'}
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24 flex items-center justify-center">
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl font-bold text-black dark:text-white mb-4">
+            {language === 'uz' ? 'Xatolik yuz berdi' : 'Произошла ошибка'}
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            {language === 'uz' ? 'Qayta urinish' : 'Попробовать снова'}
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24">
       <div className="container mx-auto">
-        {/* Header - Fixed spacing to avoid header overlap */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,50 +180,73 @@ const BlogList = () => {
         </motion.div>
 
         {/* Blog Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-        >
-          {blogs.map((blog, index) => (
-            <motion.article
-              key={blog.slug}
-              variants={itemVariants}
-              whileHover={{ y: -4 }}
-              className="group relative bg-white dark:bg-[#14151b] p-6 sm:p-7 md:p-8 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary transition-all duration-300 cursor-pointer md:hover:shadow-lg"
-            >
-              <div className="mb-4">
-                <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full">
-                  {blog.category}
-                </span>
-              </div>
+        {blogs.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
+              {language === 'uz' ? 'Maqolalar topilmadi' : 'Статьи не найдены'}
+            </p>
+          </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
+            {blogs.map((blog, index) => {
+              // Extract short description from HTML content
+              const shortDescription = blog.short || extractTextFromHTML(blog.content || '', 120);
               
-              <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-3 group-hover:text-primary transition-colors duration-200 line-clamp-2">
-                {blog.title}
-              </h2>
-              
-              <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm sm:text-base leading-relaxed line-clamp-3">
-                {blog.short}
-              </p>
-              
-              <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
-                <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                  {blog.duration}
-                </span>
-                <Link
-                  to={`/${lang || language}/blog/${blog.slug}`}
-                  className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group-hover:text-primary/80 transition-colors"
+              return (
+                <motion.article
+                  key={blog.id || blog.slug || index}
+                  variants={itemVariants}
+                  whileHover={{ y: -4 }}
+                  className="group relative bg-white dark:bg-[#14151b] p-6 sm:p-7 md:p-8 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary transition-all duration-300 cursor-pointer md:hover:shadow-lg"
                 >
-                  {t('blog.readMore') || (language === 'uz' ? 'Batafsil' : 'Читать далее')}
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
+                  {/* Category Badge */}
+                  {blog.category && (
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full">
+                        {blog.category}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* Title */}
+                  <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-3 group-hover:text-primary transition-colors duration-200 line-clamp-2">
+                    {blog.title}
+                  </h2>
+                  
+                  {/* Short Description */}
+                  {shortDescription && (
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm sm:text-base leading-relaxed line-clamp-3">
+                      {shortDescription}
+                    </p>
+                  )}
+                  
+                  {/* Duration */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
+                    {blog.duration && (
+                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                        {blog.duration}
+                      </span>
+                    )}
+                    <Link
+                      to={`/${lang || language}/blog/${blog.slug}`}
+                      className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group-hover:text-primary/80 transition-colors"
+                    >
+                      {t('blog.readMore') || (language === 'uz' ? 'Batafsil' : 'Читать далее')}
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        )}
 
         {/* Back to Home */}
         <motion.div

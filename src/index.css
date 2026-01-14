@@ -129,3 +129,124 @@
 .snowflake-dark {
   color: rgba(255, 255, 255, 0.8);
 }
+
+/* Blog Content Styles */
+.prose {
+  max-width: none;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.2;
+}
+
+.prose h1 {
+  font-size: 2.25em;
+}
+
+.prose h2 {
+  font-size: 1.875em;
+}
+
+.prose h3 {
+  font-size: 1.5em;
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1.5em;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 2em 0;
+}
+
+.prose a {
+  color: #1476FF;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #0d5cd6;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose blockquote {
+  border-left: 4px solid #1476FF;
+  padding-left: 1.5em;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #6b7280;
+}
+
+.prose code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+
+.dark .prose code {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.prose pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1.5em;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.dark .prose {
+  color: #e5e7eb;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #ffffff;
+}
+
+.dark .prose blockquote {
+  border-left-color: #1476FF;
+  color: #9ca3af;
+}
