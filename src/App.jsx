@@ -23,9 +23,9 @@ const HomePage = () => {
       <Snow />
       <Header />
       <Hero />
+      <Clients />
       <TrustBadges />
       <Services />
-      <Clients />
       <About />
       <Testimonials />
       <CTA />
