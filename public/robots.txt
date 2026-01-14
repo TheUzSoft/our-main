@@ -1,0 +1,62 @@
+# robots.txt for TheUzSoft - IT Company Website
+# https://theuzsoft.uz/robots.txt
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /.git/
+Disallow: /.env
+
+# Allow important assets
+Allow: /logo.png
+Allow: /favicon.ico
+Allow: /images/
+Allow: /assets/
+
+# Allow language routes
+Allow: /uz/
+Allow: /ru/
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /uz/
+Allow: /ru/
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /logo.png
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+Allow: /uz/
+Allow: /ru/
+Crawl-delay: 0
+
+User-agent: Yandex
+Allow: /
+Allow: /uz/
+Allow: /ru/
+Crawl-delay: 1
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://theuzsoft.uz/sitemap.xml

@@ -1,0 +1,177 @@
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import uzBlogs from '../../data/blogs/uz.json';
+import ruBlogs from '../../data/blogs/ru.json';
+
+const BlogList = () => {
+  const { language, t } = useLanguage();
+  const { lang } = useParams();
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    // Load blogs based on current language
+    const currentLang = lang || language;
+    const blogData = currentLang === 'ru' ? ruBlogs : uzBlogs;
+    setBlogs(blogData);
+  }, [lang, language]);
+
+  // Update SEO meta tags
+  useEffect(() => {
+    const currentLang = lang || language;
+    const title = currentLang === 'uz' 
+      ? 'Blog | TheUzSoft — IT yechimlar va loyihalar' 
+      : 'Блог | TheUzSoft — IT решения и проекты';
+    const description = currentLang === 'uz'
+      ? 'IT sohasidagi eng so\'nggi yangiliklar, loyihalar va texnologiyalar. TheUzSoft kompaniyasining professional blogi.'
+      : 'Последние новости, проекты и технологии в сфере IT. Профессиональный блог компании TheUzSoft.';
+    
+    document.title = title;
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', description);
+
+    // Update Open Graph
+    const updateOGTag = (property, content) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    };
+
+    updateOGTag('og:title', title);
+    updateOGTag('og:description', description);
+    updateOGTag('og:type', 'website');
+    updateOGTag('og:url', `${window.location.origin}/${currentLang}/blog`);
+    updateOGTag('og:image', `${window.location.origin}/logo.png`);
+
+    // Update canonical
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', `${window.location.origin}/${currentLang}/blog`);
+  }, [lang, language]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  return (
+    <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24">
+      <div className="container mx-auto">
+        {/* Header - Fixed spacing to avoid header overlap */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-inter text-black dark:text-white mb-4 tracking-tight">
+            {t('blog.title') || (language === 'uz' ? 'Blog' : 'Блог')}
+          </h1>
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            {t('blog.subtitle') || (language === 'uz' 
+              ? 'IT sohasidagi eng so\'nggi yangiliklar, loyihalar va texnologiyalar' 
+              : 'Последние новости, проекты и технологии в сфере IT')}
+          </p>
+        </motion.div>
+
+        {/* Blog Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
+          {blogs.map((blog, index) => (
+            <motion.article
+              key={blog.slug}
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              className="group relative bg-white dark:bg-[#14151b] p-6 sm:p-7 md:p-8 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary transition-all duration-300 cursor-pointer md:hover:shadow-lg"
+            >
+              <div className="mb-4">
+                <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full">
+                  {blog.category}
+                </span>
+              </div>
+              
+              <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-3 group-hover:text-primary transition-colors duration-200 line-clamp-2">
+                {blog.title}
+              </h2>
+              
+              <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm sm:text-base leading-relaxed line-clamp-3">
+                {blog.short}
+              </p>
+              
+              <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
+                <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                  {blog.duration}
+                </span>
+                <Link
+                  to={`/${lang || language}/blog/${blog.slug}`}
+                  className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group-hover:text-primary/80 transition-colors"
+                >
+                  {t('blog.readMore') || (language === 'uz' ? 'Batafsil' : 'Читать далее')}
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+
+        {/* Back to Home */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.3 }}
+          className="text-center mt-12 md:mt-16"
+        >
+          <Link
+            to={`/${lang || language}/`}
+            className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary transition-colors duration-200 font-medium"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            {t('blog.backToHome') || (language === 'uz' ? 'Bosh sahifaga qaytish' : 'Вернуться на главную')}
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default BlogList;

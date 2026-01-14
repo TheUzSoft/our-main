@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Main Homepage - Uzbek (Default) -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theuzsoft.uz/uz/"/>
+  </url>
+  
+  <!-- Main Homepage - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theuzsoft.uz/uz/"/>
+  </url>
+  
+  <!-- Blog List - Uzbek -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog"/>
+  </url>
+  
+  <!-- Blog List - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog"/>
+  </url>
+  
+  <!-- Services Section - Uzbek -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/#services</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#services"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#services"/>
+  </url>
+  
+  <!-- Services Section - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/#services</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#services"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#services"/>
+  </url>
+  
+  <!-- Clients Section - Uzbek -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/#clients</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#clients"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#clients"/>
+  </url>
+  
+  <!-- Clients Section - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/#clients</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#clients"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#clients"/>
+  </url>
+  
+  <!-- About Section - Uzbek -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/#about</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#about"/>
+  </url>
+  
+  <!-- About Section - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/#about</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#about"/>
+  </url>
+  
+  <!-- Contact Section - Uzbek -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/#contact</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#contact"/>
+  </url>
+  
+  <!-- Contact Section - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/#contact</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/#contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/#contact"/>
+  </url>
+  
+  <!-- Blog Posts - Uzbek -->
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/crm-tizim</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/crm-tizim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/crm-system"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/e-commerce-platforma</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/e-commerce-platforma"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/e-commerce-platform"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/mobil-ilova-ios-android</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/mobil-ilova-ios-android"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/mobile-app-ios-android"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/telegram-bot</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/telegram-bot"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/telegram-bot"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/suniy-intellekt-integrasiyasi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/suniy-intellekt-integrasiyasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/ai-integration"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/biznes-analitika-dashboard</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/biznes-analitika-dashboard"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/business-analytics-dashboard"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/pos-tizim</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/pos-tizim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/pos-system"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/bron-qilish-platformasi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/bron-qilish-platformasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/booking-platform"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/ta-lim-platformasi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/ta-lim-platformasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/education-platform"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/yetkazib-berish-logistika</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/yetkazib-berish-logistika"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/delivery-logistics"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/buxgalteriya-dasturi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/buxgalteriya-dasturi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/accounting-software"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/kochmas-mulklar-portali</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/kochmas-mulklar-portali"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/real-estate-portal"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/mashina-ijarasi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/mashina-ijarasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/car-rental"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/erp-tizim</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/erp-tizim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/erp-system"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/portfolio-sayt</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/portfolio-sayt"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/portfolio-website"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/mehmonxona-boshqaruvi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/mehmonxona-boshqaruvi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/hotel-management"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/ombor-boshqaruvi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/ombor-boshqaruvi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/inventory-management"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/tolov-gateway</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/tolov-gateway"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/payment-gateway"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/custom-api</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/custom-api"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/custom-api"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/uz/blog/korporativ-sayt</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/korporativ-sayt"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/corporate-website"/>
+  </url>
+  
+  <!-- Blog Posts - Russian -->
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/crm-system</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/crm-tizim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/crm-system"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/e-commerce-platform</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/e-commerce-platforma"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/e-commerce-platform"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/mobile-app-ios-android</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/mobil-ilova-ios-android"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/mobile-app-ios-android"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/telegram-bot</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/telegram-bot"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/telegram-bot"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/ai-integration</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/suniy-intellekt-integrasiyasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/ai-integration"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/business-analytics-dashboard</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/biznes-analitika-dashboard"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/business-analytics-dashboard"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/pos-system</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/pos-tizim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/pos-system"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/booking-platform</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/bron-qilish-platformasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/booking-platform"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/education-platform</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/ta-lim-platformasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/education-platform"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/delivery-logistics</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/yetkazib-berish-logistika"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/delivery-logistics"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/accounting-software</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/buxgalteriya-dasturi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/accounting-software"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/real-estate-portal</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/kochmas-mulklar-portali"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/real-estate-portal"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/car-rental</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/mashina-ijarasi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/car-rental"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/erp-system</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/erp-tizim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/erp-system"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/portfolio-website</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/portfolio-sayt"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/portfolio-website"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/hotel-management</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/mehmonxona-boshqaruvi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/hotel-management"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/inventory-management</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/ombor-boshqaruvi"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/inventory-management"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/payment-gateway</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/tolov-gateway"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/payment-gateway"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/custom-api</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/custom-api"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/custom-api"/>
+  </url>
+  <url>
+    <loc>https://theuzsoft.uz/ru/blog/corporate-website</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://theuzsoft.uz/uz/blog/korporativ-sayt"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://theuzsoft.uz/ru/blog/corporate-website"/>
+  </url>
+  
+</urlset>

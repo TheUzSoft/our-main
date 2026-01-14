@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "services": "Xizmatlar",
+    "clients": "Mijozlar",
+    "about": "Biz haqimizda",
+    "blog": "Blog",
+    "contact": "Aloqa",
+    "quickLinks": "Tezkor havolalar"
+  },
+  "hero": {
+    "title": "Biz biznesingizni raqamli olamga olib chiqamiz.",
+    "subtitle": "TheUzSoft — zamonaviy IT yechimlar markazi.",
+    "cta": "Buyurtma berish",
+    "learnMore": "Batafsil"
+  },
+  "services": {
+    "title": "Bizning xizmatlarimiz",
+    "subtitle": "Biz sizga eng yaxshi IT yechimlarni taqdim etamiz",
+    "learnMore": "Batafsil",
+    "features": "Xizmatlar:",
+    "price": "Narx loyihaga qarab belgilanadi",
+    "consultation": "Konsultatsiya olish",
+    "web": {
+      "title": "Veb sayt va CRM tizimlar",
+      "description": "Professional veb-saytlar va mijozlar bilan ishlash tizimlari",
+      "features": [
+        "Responsive dizayn - barcha qurilmalarda mukammal ishlaydi",
+        "SEO optimallashtirilgan - Google qidiruvida yuqori o'rinlar",
+        "Tez yuklanish - optimallashtirilgan kod va rasmlar",
+        "CRM integratsiyasi - mijozlar bilan samarali ishlash",
+        "Xavfsizlik - SSL sertifikat va ma'lumotlarni himoya qilish",
+        "24/7 texnik qo'llab-quvvatlash"
+      ]
+    },
+    "mobile": {
+      "title": "Mobil ilovalar (Android/iOS)",
+      "description": "iOS va Android uchun professional mobil ilovalar yaratish",
+      "features": [
+        "Native ilovalar - iOS va Android uchun alohida",
+        "Cross-platform - React Native yoki Flutter",
+        "App Store va Google Play'da joylashtirish",
+        "Push bildirishnomalar",
+        "Offline ishlash imkoniyati",
+        "In-app purchases integratsiyasi"
+      ]
+    },
+    "telegram": {
+      "title": "Telegram botlar va integratsiyalar",
+      "description": "Telegram botlar va turli xizmatlar bilan integratsiya",
+      "features": [
+        "Avtomatlashtirilgan botlar - 24/7 ishlaydi",
+        "Payment integratsiyasi - to'lovlarni qabul qilish",
+        "CRM bilan integratsiya",
+        "Ma'lumotlar bazasi bilan ishlash",
+        "Multi-language qo'llab-quvvatlash",
+        "Admin panel - botni boshqarish"
+      ]
+    },
+    "ai": {
+      "title": "Sun'iy intellekt loyihalari",
+      "description": "AI texnologiyalaridan foydalangan holda innovatsion yechimlar",
+      "features": [
+        "Chatbot integratsiyasi - mijozlarga avtomatik javob berish",
+        "Rasm tahlili va tanib olish",
+        "Tabiiy tilni qayta ishlash (NLP)",
+        "Ma'lumotlarni tahlil qilish va bashorat qilish",
+        "Avtomatlashtirilgan tavsiyalar tizimi",
+        "Machine Learning modellari"
+      ]
+    }
+  },
+  "clients": {
+    "title": "Biz ishlagan brendlar",
+    "subtitle": "Bizga ishonch bildirgan kompaniyalar va brendlar"
+  },
+  "about": {
+    "title": "Biz haqimizda",
+    "subtitle": "TheUzSoft — sizning ishonchli IT hamkoringiz",
+    "description": "TheUzSoft — O'zbekistonning yosh va dinamik IT kompaniyasi bo'lib, bizneslar uchun zamonaviy raqamli yechimlarni ishlab chiqadi.",
+    "experience": "Yillik tajriba",
+    "projects": "Muvaffaqiyatli loyihalar",
+    "clients": "Mamnun mijozlar",
+    "team": "Mutaxassislar"
+  },
+  "contact": {
+    "title": "Bog'lanish",
+    "subtitle": "Biz bilan aloqaga chiqing",
+    "name": "Ism",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "+998 XX XXX XX XX",
+    "message": "Xabar",
+    "send": "Yuborish",
+    "sending": "Yuborilmoqda...",
+    "address": "Manzil",
+    "success": "Xabar muvaffaqiyatli yuborildi!",
+    "error": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+    "errors": {
+      "nameRequired": "Ismni kiriting",
+      "phoneRequired": "Telefon raqamini kiriting",
+      "phoneInvalid": "To'g'ri telefon raqam kiriting (masalan: +998 XX XXX XX XX)",
+      "messageRequired": "Xabarni kiriting"
+    }
+  },
+  "testimonials": {
+    "title": "Mijozlarimiz nima deyishadi",
+    "subtitle": "Bizning mijozlarimiz bizning ishimizdan mamnun"
+  },
+  "cta": {
+    "title": "Loyihangizni boshlashga tayyormisiz?",
+    "subtitle": "Bepul konsultatsiya oling va narxlarni bilib oling",
+    "button": "Bepul konsultatsiya"
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan",
+    "company": "TheUzSoft",
+    "email": "Email"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "IT sohasidagi eng so'nggi yangiliklar, loyihalar va texnologiyalar",
+    "readMore": "Batafsil",
+    "backToBlog": "Blogga qaytish",
+    "backToHome": "Bosh sahifaga qaytish",
+    "contactUs": "Bog'lanish",
+    "contactUsTitle": "Loyihangizni boshlashga tayyormisiz?",
+    "contactUsSubtitle": "Biz bilan bog'laning va bepul konsultatsiya oling"
+  },
+  "trustBadges": {
+    "projects": "100+ Muvaffaqiyatli Loyihalar",
+    "clients": "85+ Mamnun Mijozlar",
+    "experience": "7+ Yillik Tajriba",
+    "support": "24/7 Qo'llab-quvvatlash"
+  }
+}
+
