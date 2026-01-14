@@ -16,7 +16,7 @@ const SEOHead = () => {
       ru: 'TheUzSoft - профессиональная IT компания в Узбекистане. Услуги по созданию веб-сайтов, мобильных приложений, Telegram ботов и AI проектов.'
     };
 
-    const baseUrl = window.location.origin;
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
     document.title = titles[language] || titles.uz;
     

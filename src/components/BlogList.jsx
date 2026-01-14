@@ -51,8 +51,9 @@ const BlogList = () => {
     updateOGTag('og:title', title);
     updateOGTag('og:description', description);
     updateOGTag('og:type', 'website');
-    updateOGTag('og:url', `${window.location.origin}/${currentLang}/blog`);
-    updateOGTag('og:image', `${window.location.origin}/logo.png`);
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+    updateOGTag('og:url', `${baseUrl}/${currentLang}/blog`);
+    updateOGTag('og:image', `${baseUrl}/logo.png`);
 
     // Update canonical
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -61,7 +62,7 @@ const BlogList = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', `${window.location.origin}/${currentLang}/blog`);
+    canonical.setAttribute('href', `${baseUrl}/${currentLang}/blog`);
   }, [lang, language]);
 
   const containerVariants = {

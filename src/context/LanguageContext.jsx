@@ -20,14 +20,14 @@ export const LanguageProvider = ({ children }) => {
   
   // Get language from URL, default to 'ru' if not in URL
   const currentLang = (lang && ['uz', 'ru'].includes(lang)) ? lang : 'ru';
-  const [language, setLanguage] = useState(() => currentLang);
+  const [language, setLanguage] = useState(currentLang);
 
   // Update language when URL changes
   useEffect(() => {
     if (currentLang !== language) {
       setLanguage(currentLang);
     }
-  }, [currentLang, language]);
+  }, [currentLang]);
 
   const translations = {
     uz: uzTranslations,

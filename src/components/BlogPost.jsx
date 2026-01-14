@@ -31,7 +31,7 @@ const BlogPost = () => {
   useEffect(() => {
     if (blog) {
       const currentLang = lang || language;
-      const baseUrl = window.location.origin;
+      const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
       
       // Title
       document.title = `${blog.title} | TheUzSoft`;

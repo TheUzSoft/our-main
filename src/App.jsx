@@ -72,39 +72,35 @@ const BlogPostLayout = () => {
 
 function App() {
   return (
-    <Routes>
-      {/* Default redirect to /ru */}
-      <Route path="/" element={<Navigate to="/ru" replace />} />
-      
-      {/* Language routes */}
-      <Route path="/:lang" element={
-        <DarkModeProvider>
+    <DarkModeProvider>
+      <Routes>
+        {/* Default redirect to /ru */}
+        <Route path="/" element={<Navigate to="/ru" replace />} />
+        
+        {/* Language routes */}
+        <Route path="/:lang" element={
           <LanguageProvider>
             <LanguageRoute />
           </LanguageProvider>
-        </DarkModeProvider>
-      } />
-      
-      {/* Blog routes */}
-      <Route path="/:lang/blog" element={
-        <DarkModeProvider>
+        } />
+        
+        {/* Blog routes */}
+        <Route path="/:lang/blog" element={
           <LanguageProvider>
             <BlogLayout />
           </LanguageProvider>
-        </DarkModeProvider>
-      } />
-      
-      <Route path="/:lang/blog/:slug" element={
-        <DarkModeProvider>
+        } />
+        
+        <Route path="/:lang/blog/:slug" element={
           <LanguageProvider>
             <BlogPostLayout />
           </LanguageProvider>
-        </DarkModeProvider>
-      } />
-      
-      {/* Catch all - redirect to /ru */}
-      <Route path="*" element={<Navigate to="/ru" replace />} />
-    </Routes>
+        } />
+        
+        {/* Catch all - redirect to /ru */}
+        <Route path="*" element={<Navigate to="/ru" replace />} />
+      </Routes>
+    </DarkModeProvider>
   );
 }
 
