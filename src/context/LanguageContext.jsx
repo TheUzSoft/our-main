@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import uzTranslations from '../i18n/uz.json';
 import ruTranslations from '../i18n/ru.json';
+import enTranslations from '../i18n/en.json';
 
 const LanguageContext = createContext();
 
@@ -19,7 +20,7 @@ export const LanguageProvider = ({ children }) => {
   const location = useLocation();
   
   // Get language from URL, default to 'ru' if not in URL
-  const currentLang = (lang && ['uz', 'ru'].includes(lang)) ? lang : 'ru';
+  const currentLang = (lang && ['uz', 'ru', 'en'].includes(lang)) ? lang : 'ru';
   const [language, setLanguage] = useState(currentLang);
 
   // Update language when URL changes
@@ -32,6 +33,7 @@ export const LanguageProvider = ({ children }) => {
   const translations = {
     uz: uzTranslations,
     ru: ruTranslations,
+    en: enTranslations,
   };
 
   const t = (key) => {
@@ -44,10 +46,10 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const changeLanguage = (newLang) => {
-    if (newLang === language || !['uz', 'ru'].includes(newLang)) return;
+    if (newLang === language || !['uz', 'ru', 'en'].includes(newLang)) return;
     
     // Get current path without language prefix
-    let currentPath = location.pathname.replace(/^\/(uz|ru)/, '') || '/';
+    let currentPath = location.pathname.replace(/^\/(uz|ru|en)/, '') || '/';
     
     // If we're on a blog post page, redirect to blog list (since slugs differ between languages)
     if (currentPath.startsWith('/blog/')) {

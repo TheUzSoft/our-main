@@ -12,7 +12,6 @@ import Footer from './components/Footer';
 import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
 import SEOHead from './components/SEOHead';
-import Snow from './components/Snow';
 import { LanguageProvider } from './context/LanguageContext';
 import { DarkModeProvider } from './context/DarkModeContext';
 
@@ -20,7 +19,6 @@ const HomePage = () => {
   return (
     <div className="App">
       <SEOHead />
-      <Snow />
       <Header />
       <Hero />
       <Clients />
@@ -39,7 +37,7 @@ const LanguageRoute = () => {
   const { lang } = useParams();
   
   // Validate language
-  if (lang && !['uz', 'ru'].includes(lang)) {
+  if (lang && !['uz', 'ru', 'en'].includes(lang)) {
     return <Navigate to="/ru" replace />;
   }
   
@@ -50,7 +48,6 @@ const BlogLayout = () => {
   return (
     <div className="App">
       <SEOHead />
-      <Snow />
       <Header />
       <BlogList />
       <Footer />
@@ -62,7 +59,6 @@ const BlogPostLayout = () => {
   return (
     <div className="App">
       <SEOHead />
-      <Snow />
       <Header />
       <BlogPost />
       <Footer />

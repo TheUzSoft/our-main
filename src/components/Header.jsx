@@ -241,6 +241,18 @@ const Header = () => {
               >
                 RU
               </button>
+              <button
+                onClick={() => changeLanguage('en')}
+                className={`px-2.5 sm:px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 ${
+                  language === 'en'
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-gray-700 dark:text-white hover:text-primary'
+                }`}
+                aria-pressed={language === 'en'}
+                aria-label="Switch to English"
+              >
+                EN
+              </button>
             </div>
 
             {/* Mobile Menu Button */}

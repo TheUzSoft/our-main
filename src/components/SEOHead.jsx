@@ -8,12 +8,14 @@ const SEOHead = () => {
     // Update document title
     const titles = {
       uz: 'TheUzSoft - Zamonaviy IT Yechimlar | Veb-saytlar, Mobil Ilovalar, Telegram Botlar',
-      ru: 'TheUzSoft - Современные IT Решения | Веб-сайты, Мобильные Приложения, Telegram Боты'
+      ru: 'TheUzSoft - Современные IT Решения | Веб-сайты, Мобильные Приложения, Telegram Боты',
+      en: 'TheUzSoft - Modern IT Solutions | Websites, Mobile Apps, Telegram Bots'
     };
 
     const descriptions = {
       uz: 'TheUzSoft - O\'zbekistondagi professional IT kompaniya. Veb-saytlar, mobil ilovalar, Telegram botlar va AI loyihalar yaratish xizmatlari.',
-      ru: 'TheUzSoft - профессиональная IT компания в Узбекистане. Услуги по созданию веб-сайтов, мобильных приложений, Telegram ботов и AI проектов.'
+      ru: 'TheUzSoft - профессиональная IT компания в Узбекистане. Услуги по созданию веб-сайтов, мобильных приложений, Telegram ботов и AI проектов.',
+      en: 'TheUzSoft - professional IT company in Uzbekistan. Services for creating websites, mobile applications, Telegram bots and AI projects.'
     };
 
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
@@ -43,7 +45,12 @@ const SEOHead = () => {
     updateOGTag('og:title', titles[language] || titles.uz);
     updateOGTag('og:description', descriptions[language] || descriptions.uz);
     updateOGTag('og:type', 'website');
-    updateOGTag('og:locale', language === 'uz' ? 'uz_UZ' : 'ru_RU');
+    const localeMap = {
+      uz: 'uz_UZ',
+      ru: 'ru_RU',
+      en: 'en_US'
+    };
+    updateOGTag('og:locale', localeMap[language] || 'ru_RU');
     updateOGTag('og:url', `${baseUrl}/${language}/`);
     updateOGTag('og:image', `${baseUrl}/logo.png`);
     updateOGTag('og:site_name', 'TheUzSoft');
@@ -87,6 +94,7 @@ const SEOHead = () => {
 
     updateAlternate('uz', `${baseUrl}/uz/`);
     updateAlternate('ru', `${baseUrl}/ru/`);
+    updateAlternate('en', `${baseUrl}/en/`);
     updateAlternate('x-default', `${baseUrl}/ru/`);
 
   }, [language]);

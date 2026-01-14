@@ -46,14 +46,14 @@ const BlogPost = () => {
       } catch (err) {
         console.error('Failed to load blog:', err);
         // Try JSON fallback before showing error
-        const currentLang = lang || language;
+    const currentLang = lang || language;
         const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
         const foundBlog = fallbackData.find((b) => b.slug === slug);
-        
-        if (foundBlog) {
-          setBlog(foundBlog);
+    
+    if (foundBlog) {
+      setBlog(foundBlog);
           setError(null);
-        } else {
+    } else {
           setError('not_found');
         }
       } finally {
@@ -106,7 +106,12 @@ const BlogPost = () => {
       updateOGTag('og:type', 'article');
       updateOGTag('og:url', `${baseUrl}/${currentLang}/blog/${slug}`);
       updateOGTag('og:image', ogImage);
-      updateOGTag('og:locale', currentLang === 'uz' ? 'uz_UZ' : 'ru_RU');
+      const localeMap = {
+        uz: 'uz_UZ',
+        ru: 'ru_RU',
+        en: 'en_US'
+      };
+      updateOGTag('og:locale', localeMap[currentLang] || 'ru_RU');
 
       // Update canonical
       let canonical = document.querySelector('link[rel="canonical"]');
@@ -226,11 +231,11 @@ const BlogPost = () => {
         >
           {/* Category Badge */}
           {blog.category && (
-            <div className="mb-6">
-              <span className="inline-block px-4 py-2 text-sm font-semibold text-primary bg-primary/10 rounded-full">
-                {blog.category}
-              </span>
-            </div>
+          <div className="mb-6">
+            <span className="inline-block px-4 py-2 text-sm font-semibold text-primary bg-primary/10 rounded-full">
+              {blog.category}
+            </span>
+          </div>
           )}
 
           {/* Title */}
@@ -240,11 +245,11 @@ const BlogPost = () => {
 
           {/* Duration */}
           {(blog.duration || blog.development_time || blog.production_time || blog.time) && (
-            <div className="mb-10 pb-6 border-b border-gray-200 dark:border-gray-700">
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+          <div className="mb-10 pb-6 border-b border-gray-200 dark:border-gray-700">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                 {blog.duration || blog.development_time || blog.production_time || blog.time}
-              </p>
-            </div>
+            </p>
+          </div>
           )}
 
           {/* Cover Image */}
@@ -274,14 +279,14 @@ const BlogPost = () => {
               ) : (
                 // Plain text content - split by paragraphs
                 <div className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-white leading-relaxed whitespace-pre-line space-y-6">
-                  {blog.content.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="mb-6 last:mb-0">
-                      {paragraph.trim()}
-                    </p>
-                  ))}
-                </div>
-              )}
+              {blog.content.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="mb-6 last:mb-0">
+                  {paragraph.trim()}
+                </p>
+              ))}
             </div>
+              )}
+          </div>
           )}
 
           {/* CTA Section */}

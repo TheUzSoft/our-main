@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "clients": "Clients",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "quickLinks": "Quick Links"
+  },
+  "hero": {
+    "title": "We bring your business to the digital world.",
+    "subtitle": "TheUzSoft — center of modern IT solutions.",
+    "cta": "Place Order",
+    "learnMore": "Learn More"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We offer you the best IT solutions",
+    "learnMore": "Learn More",
+    "features": "Services:",
+    "price": "Price is determined depending on the project",
+    "consultation": "Get Consultation",
+    "web": {
+      "title": "Websites and CRM Systems",
+      "description": "Professional websites and customer management systems",
+      "features": [
+        "Responsive design - works perfectly on all devices",
+        "SEO optimized - high rankings in Google search",
+        "Fast loading - optimized code and images",
+        "CRM integration - efficient customer management",
+        "Security - SSL certificate and data protection",
+        "24/7 technical support"
+      ]
+    },
+    "mobile": {
+      "title": "Mobile Apps (Android/iOS)",
+      "description": "Professional mobile app development for iOS and Android",
+      "features": [
+        "Native apps - separate for iOS and Android",
+        "Cross-platform - React Native or Flutter",
+        "Publishing on App Store and Google Play",
+        "Push notifications",
+        "Offline functionality",
+        "In-app purchases integration"
+      ]
+    },
+    "telegram": {
+      "title": "Telegram Bots and Integrations",
+      "description": "Telegram bots and integration with various services",
+      "features": [
+        "Automated bots - work 24/7",
+        "Payment integration - accept payments",
+        "CRM integration",
+        "Database integration",
+        "Multi-language support",
+        "Admin panel - bot management"
+      ]
+    },
+    "ai": {
+      "title": "Artificial Intelligence Projects",
+      "description": "Innovative solutions using AI technologies",
+      "features": [
+        "Chatbot integration - automatic customer responses",
+        "Image analysis and recognition",
+        "Natural Language Processing (NLP)",
+        "Data analysis and forecasting",
+        "Automated recommendation system",
+        "Machine Learning models"
+      ]
+    }
+  },
+  "clients": {
+    "title": "Our Clients",
+    "subtitle": "Companies and brands that trust us"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "TheUzSoft — your reliable IT partner",
+    "description": "TheUzSoft — a young and dynamic IT company in Uzbekistan, developing modern digital solutions for businesses.",
+    "experience": "Years of Experience",
+    "projects": "Successful Projects",
+    "clients": "Satisfied Clients",
+    "team": "Specialists"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with us",
+    "name": "Name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+998 XX XXX XX XX",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "address": "Address",
+    "success": "Message sent successfully!",
+    "error": "An error occurred. Please try again.",
+    "errors": {
+      "nameRequired": "Enter your name",
+      "phoneRequired": "Enter your phone number",
+      "phoneInvalid": "Enter a valid phone number (e.g.: +998 XX XXX XX XX)",
+      "messageRequired": "Enter your message"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Our clients are satisfied with our work"
+  },
+  "cta": {
+    "title": "Ready to Start Your Project?",
+    "subtitle": "Get a free consultation and learn about pricing",
+    "button": "Free Consultation"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "company": "TheUzSoft",
+    "email": "Email"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Latest news, projects and technologies in IT",
+    "readMore": "Read More",
+    "backToBlog": "Back to Blog",
+    "backToHome": "Back to Home",
+    "contactUs": "Contact Us",
+    "contactUsTitle": "Ready to Start Your Project?",
+    "contactUsSubtitle": "Contact us and get a free consultation"
+  },
+  "trustBadges": {
+    "projects": "100+ Successful Projects",
+    "clients": "85+ Satisfied Clients",
+    "experience": "7+ Years of Experience",
+    "support": "24/7 Support"
+  }
+}
+
