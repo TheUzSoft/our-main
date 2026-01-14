@@ -239,10 +239,10 @@ const BlogPost = () => {
           </h1>
 
           {/* Duration */}
-          {blog.duration && (
+          {(blog.duration || blog.development_time || blog.production_time || blog.time) && (
             <div className="mb-10 pb-6 border-b border-gray-200 dark:border-gray-700">
               <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                {blog.duration}
+                {blog.duration || blog.development_time || blog.production_time || blog.time}
               </p>
             </div>
           )}

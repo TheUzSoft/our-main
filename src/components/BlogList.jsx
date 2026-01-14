@@ -197,6 +197,9 @@ const BlogList = () => {
               // Extract short description from HTML content
               const shortDescription = blog.short || extractTextFromHTML(blog.content || '', 120);
               
+              // Get duration field - check multiple possible field names
+              const duration = blog.duration || blog.development_time || blog.production_time || blog.time;
+              
               return (
                 <motion.article
                   key={blog.id || blog.slug || index}
@@ -227,9 +230,13 @@ const BlogList = () => {
                   
                   {/* Duration */}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
-                    {blog.duration && (
+                    {duration ? (
                       <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                        {blog.duration}
+                        {duration}
+                      </span>
+                    ) : (
+                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                        {language === 'uz' ? 'Ishlab chiqish vaqti: to\'liq ma\'lumot' : 'Время разработки: полная информация'}
                       </span>
                     )}
                     <Link
