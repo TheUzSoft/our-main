@@ -3,8 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { fetchBlogs, extractTextFromHTML, sortBlogsByDate } from '../utils/blogApi';
-import uzBlogs from '../../data/blogs/uz.json';
-import ruBlogs from '../../data/blogs/ru.json';
 
 const BlogList = () => {
   const { language, t } = useLanguage();
@@ -20,33 +18,18 @@ const BlogList = () => {
         setError(null);
         const currentLang = lang || language;
         
-        // Try to fetch from API first
-        try {
-          const blogData = await fetchBlogs(currentLang);
-          if (blogData && blogData.length > 0) {
-            // Sort blogs by date (newest first)
-            const sortedBlogs = sortBlogsByDate(blogData);
-            setBlogs(sortedBlogs);
-            setLoading(false);
-            return;
-          }
-        } catch (apiError) {
-          console.warn('API failed, using fallback JSON:', apiError);
+        const blogData = await fetchBlogs(currentLang);
+        if (blogData && blogData.length > 0) {
+          // Sort blogs by date (newest first)
+          const sortedBlogs = sortBlogsByDate(blogData);
+          setBlogs(sortedBlogs);
+        } else {
+          setBlogs([]);
         }
-        
-        // Fallback to JSON files if API fails or returns empty
-        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
-        // Sort fallback data too (by id, assuming higher id = newer)
-        const sortedFallback = sortBlogsByDate(fallbackData || []);
-        setBlogs(sortedFallback);
       } catch (err) {
         console.error('Failed to load blogs:', err);
-        // Even if everything fails, try JSON fallback
-        const currentLang = lang || language;
-        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
-        const sortedFallback = sortBlogsByDate(fallbackData || []);
-        setBlogs(sortedFallback);
-        setError(null); // Don't show error, use fallback
+        setError(err.message || 'Failed to load blogs');
+        setBlogs([]);
       } finally {
         setLoading(false);
       }

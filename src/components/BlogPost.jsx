@@ -3,8 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { fetchBlogBySlug, extractTextFromHTML } from '../utils/blogApi';
-import uzBlogs from '../../data/blogs/uz.json';
-import ruBlogs from '../../data/blogs/ru.json';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -22,40 +20,20 @@ const BlogPost = () => {
         setError(null);
         const currentLang = lang || language;
         
-        // Try to fetch from API first
-        try {
-          const blogData = await fetchBlogBySlug(slug, currentLang);
-          if (blogData) {
-            setBlog(blogData);
-            setLoading(false);
-            return;
-          }
-        } catch (apiError) {
-          console.warn('API failed, using fallback JSON:', apiError);
-        }
-        
-        // Fallback to JSON files if API fails
-        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
-        const foundBlog = fallbackData.find((b) => b.slug === slug);
-        
-        if (foundBlog) {
-          setBlog(foundBlog);
+        const blogData = await fetchBlogBySlug(slug, currentLang);
+        if (blogData) {
+          setBlog(blogData);
         } else {
           setError('not_found');
         }
       } catch (err) {
         console.error('Failed to load blog:', err);
-        // Try JSON fallback before showing error
-    const currentLang = lang || language;
-        const fallbackData = currentLang === 'ru' ? ruBlogs : uzBlogs;
-        const foundBlog = fallbackData.find((b) => b.slug === slug);
-    
-    if (foundBlog) {
-      setBlog(foundBlog);
-          setError(null);
-    } else {
+        if (err.message && err.message.includes('404')) {
           setError('not_found');
+        } else {
+          setError(err.message || 'Failed to load blog');
         }
+        setBlog(null);
       } finally {
         setLoading(false);
       }
