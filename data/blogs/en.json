@@ -1,0 +1,163 @@
+[
+  {
+    "slug": "crm-system",
+    "title": "CRM System — Digital Solution for Customer Management",
+    "short": "With a CRM system, you automate customer interactions, track orders, and improve customer relationships.",
+    "content": "CRM (Customer Relationship Management) system is an essential tool for modern business, providing the ability to fully automate customer interaction processes. This system serves as a central platform for your company and collects all customer data, order history, payments, and correspondence in one place, ensuring effective management.\n\nThe main advantage of a CRM system is that it allows you to implement a personalized approach to each customer. Each customer's complete profile, previous orders, individual needs, and behavior analysis are stored in the system. This enables you to provide personalized services to each customer and significantly increase sales.\n\nThe system includes real-time reporting and analytics modules, allowing you to track sales dynamics, customer loyalty, marketing campaign effectiveness, and employee performance metrics. The automatic notification system instantly delivers new offers, discounts, or important updates to customers.\n\nCRM system can be adapted for various business sectors: retail, service provision, B2B sales, and more. The system supports mobile applications, web interfaces, and desktop versions, giving your employees the ability to work from anywhere and on any device.\n\nDuring development, we take into account the specific needs of your business and customize the system specifically for you. Integrated payment systems, email marketing platforms, and other business tools turn your CRM system into a fully automated ecosystem.",
+    "duration": "Development time: 2-3 weeks",
+    "category": "For Business"
+  },
+  {
+    "slug": "e-commerce-platform",
+    "title": "E-commerce Platform — Powerful Solution for Online Sales",
+    "short": "Sell your products online and provide convenient services to customers with a modern e-commerce platform.",
+    "content": "E-commerce platform is essential for any business today, providing access to the global market and 24/7 customer service. Creating a professional online store involves not only displaying products but also building a fully functional sales ecosystem.\n\nOur platform includes a product catalog, intelligent search system, filtering and sorting capabilities, as well as a convenient shopping cart and checkout process for customers. The system supports various payment methods: bank cards, electronic wallets, cash on delivery, and other methods. Inventory management works automatically and updates product availability in real time.\n\nSEO optimization and fast loading speeds bring your store to high positions in search engines. Mobile-optimized design and Progressive Web App (PWA) technology provide customers with app-like convenience.\n\nMarketing tools are integrated into the platform: discounts, bonus systems, referral programs, and email marketing. Customer accounts include order history, favorite products, and personal dashboard.\n\nWith the admin panel, you manage products, track orders, control inventory, and get detailed reports. The platform can be multi-language and multi-currency, making it an ideal solution for international trade.",
+    "duration": "Development time: 3-4 weeks",
+    "category": "E-commerce"
+  },
+  {
+    "slug": "mobile-app-ios-android",
+    "title": "Mobile Application (iOS/Android) — Your Business in Your Hands",
+    "short": "Creating professional mobile applications for iOS and Android — convenience and new opportunities for your customers.",
+    "content": "Mobile applications are a crucial factor in business success today, providing customers with the ability to receive services anytime and anywhere. Creating a professional mobile application involves not only technical perfection but also maximum improvement of user experience.\n\nWe create applications for iOS and Android using native applications or cross-platform solutions (React Native, Flutter). Native applications fully utilize each platform's unique capabilities and provide the best performance. Cross-platform solutions allow faster and cheaper development using a single codebase.\n\nThe application includes user authentication, personal dashboard, push notifications, offline functionality, and real-time updates. Payment integrations, biometric authentication, and geolocation services make the application even more functional.\n\nWe fully support the process of publishing the application in the App Store and Google Play, updating versions, and improving user interaction. Analytics integration allows you to analyze user behavior and continuously improve the application.\n\nIn the mobile application development process, we pay special attention to UX/UI design, performance optimization, security, and testing. As a result, you get a convenient, fast, and secure application for your customers.",
+    "duration": "Development time: 4-6 weeks",
+    "category": "Mobile Apps"
+  },
+  {
+    "slug": "telegram-bot",
+    "title": "Telegram Bot — Automated Services",
+    "short": "Provide 24/7 services to customers, accept orders, and automate processes with a Telegram bot.",
+    "content": "Telegram bots are one of the most effective and cost-effective ways to automate business today, providing the ability to fully automate customer interactions. Bots work 24/7, respond instantly, and save human resources.\n\nOur created bots accept orders, manage payments, store data, and respond to customers instantly. Bots are fully integrated with CRM systems, payment systems, and databases, enabling centralized management of all processes.\n\nMulti-language support, admin panel, and real-time statistics allow you to effectively automate business processes. Bots provide customers with product information, accept orders, process payments, and track delivery status.\n\nBots are used in various sectors: order taking for restaurants, booking for service companies, online store for e-commerce, tests for educational institutions, and more. Each bot is adapted to the specific needs of your business.\n\nWith a bot, you significantly reduce customer service costs and improve operational efficiency. Push notifications, marketing campaigns, and customer interactions are all managed automatically.",
+    "duration": "Development time: 1-2 weeks",
+    "category": "Automation"
+  },
+  {
+    "slug": "ai-integration",
+    "title": "Artificial Intelligence Integration — Smart Solutions",
+    "short": "Using AI technologies to create chatbots, image analysis, and automated data processing.",
+    "content": "Artificial intelligence technologies are one of the most innovative ways to develop business today, providing the ability to create smart and automated solutions. AI integration gives you a competitive advantage and significantly improves service quality.\n\nAI chatbots respond to customers 24/7, understand natural language, and can answer complex questions. Chatbots analyze customer requests, find relevant information, and provide personalized responses. This increases customer satisfaction and reduces employee workload.\n\nImage analysis and recognition systems speed up processes and reduce errors. For example, automatic product classification, document scanning and processing, biometric user recognition, and other functions.\n\nNatural Language Processing (NLP) technology provides the ability to understand customer requests, sentiment analysis, and automatic categorization. With machine learning models, you analyze customer behavior, make predictions, and create recommendation systems.\n\nAI integration is used in various sectors: customer service, marketing, financial analysis, security, and more. Our solutions adapt to the specific needs of your business and continuously learn and improve.",
+    "duration": "Development time: 3-5 weeks",
+    "category": "AI/ML"
+  },
+  {
+    "slug": "business-analytics-dashboard",
+    "title": "Business Analytics Dashboard — Data-Driven Decisions",
+    "short": "Track business metrics in real time, make strategic decisions with reports and visualizations.",
+    "content": "Business analytics dashboard is a crucial tool for modern companies, providing the ability to see all important metrics in one place and make quick decisions. Dashboard collects data in real time, displays it using visual graphs and diagrams, and supports various filters.\n\nYou track sales dynamics, profit, customer statistics, marketing effectiveness, employee performance metrics, and other important metrics. With the dashboard, you make quick and accurate decisions, identify problems in advance, and develop your business.\n\nData is collected from various sources: CRM systems, payment systems, marketing platforms, web analytics, and more. All data is centralized and updated in real time.\n\nThe dashboard complies with security standards, and only authorized users have access. Different views and reports can be configured for users at different levels.\n\nVisualization tools allow you to see complex data in an understandable format. Interactive graphs, tables, and diagrams give you the ability to perform deep analysis. The export function allows you to download reports in PDF or Excel format.",
+    "duration": "Development time: 2-3 weeks",
+    "category": "Analytics"
+  },
+  {
+    "slug": "pos-system",
+    "title": "POS System — Point of Sale Management",
+    "short": "Automate sales processes and track inventory in real time with a modern POS system.",
+    "content": "POS (Point of Sale) system is a powerful solution that manages all operations at the point of sale and is an essential tool for retail business. The system automates sales processes, tracks inventory in real time, and creates detailed reports.\n\nThe system includes a product catalog, prices, discounts, payment methods, and inventory management. POS system records sales operations in real time, updates inventory, and creates automatic reports. The system supports various payment methods: cash, bank cards, online payments, and more.\n\nSystem integrated with fiscal printers automatically creates necessary documents for tax authorities. Data is sent to the central server in real time, making it an ideal solution for multi-location sales.\n\nWith mobile POS applications, you can sell from anywhere. For couriers, street vendors, or mobile stores, mobile POS system is a convenient and effective solution.\n\nThe system includes employee management, discount system, bonus programs, and customer cards. Detailed reports allow you to track sales dynamics, best-selling products, and employee performance.",
+    "duration": "Development time: 2-3 weeks",
+    "category": "Retail"
+  },
+  {
+    "slug": "booking-platform",
+    "title": "Booking Platform — Online Reservation System",
+    "short": "Creating a professional booking system for restaurants, hotels, and services.",
+    "content": "Booking platform provides the ability to create an online reservation system for restaurants, hotels, service companies, and other businesses. The platform gives customers convenient and quick booking capabilities, which increases customer satisfaction and improves business efficiency.\n\nThe system includes calendar view, availability display, automatic confirmation, and notifications. The platform updates availability in real time, offers additional services, and stores customer data. With the admin panel, you manage bookings, configure the calendar, and track statistics.\n\nSMS and email notifications instantly inform customers about booking confirmation, reminders, and changes. Payment integrations allow customers to make online payments.\n\nMobile optimization and responsive design allow you to provide convenient services to customers from any device. The platform is SEO optimized and appears well in search engines.\n\nThe system includes customer profiles, order history, favorite places, and personal dashboard. This increases customer loyalty and encourages repeat use.",
+    "duration": "Development time: 2-3 weeks",
+    "category": "Services"
+  },
+  {
+    "slug": "education-platform",
+    "title": "Education Platform — Online Learning System",
+    "short": "Fully functional education platform with online courses, video lessons, tests, and certificates.",
+    "content": "Education platform is a powerful solution for modern educational institutions and teachers, providing the ability to create an online learning system. The platform provides a fully functional education ecosystem with video lessons, interactive materials, tests, homework, and certificates.\n\nStudents create their profile, watch lessons, take tests, and track progress. The platform supports video streaming, chat, forum, and payment integrations. With a mobile application, students can learn from anywhere.\n\nTeachers upload lessons, create tests, evaluate students, and view statistics. The platform includes real-time assessment, automatic tests, and progress tracking.\n\nThe platform supports various learning formats: video lessons, audio materials, text lessons, interactive exercises, and more. Gamification elements make the learning process even more interesting and effective.\n\nThe certificate system allows students to receive certificates after successfully completing courses. The platform can be multi-language and multi-currency, providing the ability to attract international students.",
+    "duration": "Development time: 4-5 weeks",
+    "category": "Education"
+  },
+  {
+    "slug": "delivery-logistics",
+    "title": "Delivery and Logistics Application",
+    "short": "Order management system for couriers, customers, and administrators.",
+    "content": "Delivery and logistics application provides a fully functional solution for delivery business, enabling automation of all processes. The application includes three main parts: order placement for customers, order acceptance and delivery for couriers, and management of all processes for administrators.\n\nCustomers use the application to place orders, make payments, and track order status in real time. GPS tracking system allows customers to know the exact location of the courier and delivery time.\n\nCouriers use the application to accept new orders, use an optimized map to find the shortest route, and update order status. Push notifications allow couriers to instantly receive information about new orders.\n\nAdministrators track all orders, manage couriers, view statistics, and create reports. The system includes real-time monitoring, analytics, and optimization tools.\n\nPayment integrations, SMS and push notifications, rating system, and customer support make the application even more functional. The system supports multiple cities and regions.",
+    "duration": "Development time: 4-5 weeks",
+    "category": "Logistics"
+  },
+  {
+    "slug": "accounting-software",
+    "title": "Accounting Software — Financial Reports",
+    "short": "Professional solution for automating accounting operations, reports, and tax calculations.",
+    "content": "Accounting software is an important tool for any business, providing the ability to manage financial operations and create reports. Professional accounting software gives you the ability to automate all financial processes and create necessary documents for tax authorities.\n\nThe software includes income and expenses, calculations, tax calculations, reports, and database. The software supports various currencies, performs automatic calculations, and creates necessary reports for tax authorities.\n\nIntegrated bank APIs automatically record payments. This saves time and reduces errors. The software complies with security standards and encrypts data.\n\nWith a mobile application, you can track financial operations from anywhere. There are real-time reports, push notifications, and data synchronization.\n\nThe software includes various reports: income and expenses, profit and loss, tax calculations, balance, and more. All reports are displayed with visual graphs and diagrams.\n\nThe software can be multi-user and different permission levels can be configured. This makes it an ideal solution for large companies.",
+    "duration": "Development time: 3-4 weeks",
+    "category": "Finance"
+  },
+  {
+    "slug": "real-estate-portal",
+    "title": "Real Estate Portal — Housing Market",
+    "short": "Professional platform for selling and renting housing, offices, and land plots.",
+    "content": "Real estate portal is a professional platform for selling and renting housing, offices, and land plots, organizing effective interaction between agents and customers. The portal includes property catalog, powerful search filters, map, agent profiles, and contact form.\n\nUsers search for properties, apply filters (price, area, location, features), view on map, and contact agents. Map integration allows users to see properties geographically.\n\nAgents upload properties, add photos and videos, update information, and interact with customers. Agents have personal dashboard, statistics, and marketing tools.\n\nThe portal is SEO optimized, optimized for mobile devices, and supports various payment integrations. There are real-time updates and push notifications.\n\nThe system includes customer profiles, favorite properties, search history, and personal dashboard. This increases customer convenience and encourages repeat use.\n\nThe portal can be multi-language and can be adapted for various regions. This provides the ability to attract international customers.",
+    "duration": "Development time: 3-4 weeks",
+    "category": "Real Estate"
+  },
+  {
+    "slug": "car-rental",
+    "title": "Car Rental Management — Car Rental System",
+    "short": "Creating a fully functional system for renting cars and management.",
+    "content": "Car rental management system provides the ability to fully automate car rental business. The system includes car catalog, availability calendar, booking, payment integrations, and reports.\n\nCustomers view cars, check availability, book, and make payments. The system displays car specifications, photos, prices, and availability information in detail.\n\nAdministrators manage cars, configure prices, confirm bookings, and track statistics. The system includes real-time availability updates, automatic price configuration, and booking management.\n\nGPS tracking system allows administrators to track car status and ensure security. Automatic notifications deliver booking confirmation, reminders, and important updates to customers.\n\nWith a mobile application, customers can rent a car from anywhere. The application includes car catalog, booking, payments, and GPS tracking.\n\nThe system includes customer profiles, order history, rating system, and support. This increases customer satisfaction and improves business efficiency.",
+    "duration": "Development time: 3-4 weeks",
+    "category": "Transport"
+  },
+  {
+    "slug": "erp-system",
+    "title": "ERP System — Enterprise Resource Management",
+    "short": "Powerful solution for managing enterprise resources, automating processes, and improving efficiency.",
+    "content": "ERP (Enterprise Resource Planning) system is a powerful solution for large companies, providing the ability for centralized management of enterprise resources. The system includes finance, human resources, inventory, project management, procurement, and reports.\n\nERP system ensures data exchange between all departments, automates processes, and tracks metrics in real time. The system has a modular architecture and allows adding necessary functions.\n\nFinancial module allows managing all financial operations, creating reports, and performing tax calculations. Human resources module manages employee data, working hours, salaries, and other HR processes.\n\nInventory module tracks warehouse operations, product management, and stock. Project management module provides the ability to plan, track, and evaluate projects.\n\nWith security, audit, and backup systems, you protect your data. The system includes various permission levels, user management, and activity monitoring.\n\nERP system is used in various sectors: manufacturing, services, trade, and more. The system adapts to the specific needs of your company.",
+    "duration": "Development time: 6-8 weeks",
+    "category": "Corporate"
+  },
+  {
+    "slug": "portfolio-website",
+    "title": "Portfolio Website — Professional Appearance",
+    "short": "Portfolio website for showcasing projects, interacting with customers, and creating a professional image.",
+    "content": "Portfolio website provides the ability to professionally showcase your projects. The website includes project gallery, services section, about section, contact form, and blog.\n\nThe website is SEO optimized, loads quickly, and works perfectly on all devices. With animations, interactive elements, and modern design, you attract customer attention.\n\nThe website includes integrated analytics, CRM, and marketing tools. With content management system (CMS), you can update the website yourself and add new projects.\n\nPortfolio website is used in various sectors: design studios, programming companies, photography, videography, and more. Each website reflects the unique features of your activity.\n\nThe website includes project filters, search, categories, and detailed project pages. This gives customers the ability to quickly find needed information.\n\nMobile optimization and high loading speed are important for website success. Our created websites comply with all modern standards.",
+    "duration": "Development time: 1-2 weeks",
+    "category": "Portfolio"
+  },
+  {
+    "slug": "hotel-management",
+    "title": "Hotel Management System — Hotel Management",
+    "short": "Professional system for managing rooms, booking, payments, and customer service.",
+    "content": "Hotel management system provides the ability to fully automate hotel operations. The system includes room management, booking, payments, customer data, reports, and integrated POS system.\n\nThe system updates room availability in real time, automatically configures prices, and serves customers. Online booking integrations, channel manager, and payment gateways allow providing convenient services to customers.\n\nWith a mobile application, employees can access the system from anywhere. The application includes room management, booking, customer data, and reports.\n\nThe system includes customer profiles, order history, rating system, and support. This increases customer satisfaction and encourages repeat use.\n\nThe system includes real-time monitoring, analytics, and optimization tools. You track sales dynamics, room usage, and customer statistics.\n\nThe system supports multiple hotels and provides centralized management. This makes it an ideal solution for large hotel chains.",
+    "duration": "Development time: 4-5 weeks",
+    "category": "Hotel"
+  },
+  {
+    "slug": "inventory-management",
+    "title": "Warehouse Management — Inventory System",
+    "short": "Managing warehouse operations, tracking inventory, and creating automatic reports.",
+    "content": "Warehouse management system provides the ability to effectively manage inventory. The system includes product catalog, incoming and outgoing operations, inventory, reports, and barcode scanner integration.\n\nThe system updates warehouse status in real time, tracks minimum stock, and sends automatic notifications. With a mobile application, employees perform operations in the warehouse, quickly perform incoming and outgoing operations using a barcode scanner.\n\nThe system supports various warehouses and provides centralized management. This makes it an ideal solution for businesses with multiple warehouses.\n\nThe system includes real-time monitoring, analytics, and optimization tools. You track inventory status, incoming and outgoing operations, and reports.\n\nBarcode scanner integration allows quickly and accurately performing operations. This saves time and reduces errors.\n\nThe system includes various reports: inventory status, incoming and outgoing operations, minimum stock, and more. All reports are displayed with visual graphs and diagrams.",
+    "duration": "Development time: 3-4 weeks",
+    "category": "Warehouse"
+  },
+  {
+    "slug": "payment-gateway",
+    "title": "Payment Gateway Integration",
+    "short": "Integration with various payment systems — cards, electronic wallets, and other payment methods.",
+    "content": "Payment gateway integration provides the ability to accept various payment methods. The system supports bank cards, electronic wallets (Payme, Click, Uzumbank), cryptocurrencies, and other payment methods.\n\nIntegration is secure, complies with PCI DSS standards, and processes payments in real time. The system includes payment history, refund operations, automatic notifications, and reports.\n\nWith SDKs for mobile application and website, you accept payments on any platform. Integration process is fast and easy, our specialists perform all technical work.\n\nThe system includes real-time monitoring, logging, and analytics. You track payment statistics, successful and unsuccessful payments.\n\nSecurity standards help protect customer data. The system includes encryption, tokenization, and other security tools.\n\nThe system can be adapted for various business sectors: e-commerce, services, education, and more. Each integration adapts to the specific needs of your business.",
+    "duration": "Development time: 2-3 weeks",
+    "category": "Payments"
+  },
+  {
+    "slug": "custom-api",
+    "title": "Custom API Solutions — Integration Platform",
+    "short": "Professional API solutions for data exchange between various systems.",
+    "content": "Custom API solutions provide the ability to organize data exchange between various systems. API is based on RESTful architecture, protected with secure authentication and rate limiting.\n\nAPI is documented, has a versioning system, and supports various formats (JSON, XML). With API, you integrate with CRM, ERP, payment systems, and other systems.\n\nReal-time monitoring, logging, and analytics allow tracking API performance. With webhooks, you receive events in real time.\n\nAPI complies with security standards and supports OAuth, JWT, and other authentication methods. Rate limiting allows controlling API load.\n\nAPI can be adapted for various business sectors: e-commerce, logistics, finance, and more. Each API adapts to the specific needs of your business.\n\nAPI documentation allows other developers to easily use your API. Our created APIs comply with all modern standards.",
+    "duration": "Development time: 2-4 weeks",
+    "category": "API"
+  },
+  {
+    "slug": "corporate-website",
+    "title": "Corporate Website — Company's Online Image",
+    "short": "Professional corporate website with company information, services, projects, and contacts.",
+    "content": "Corporate website provides the ability to create a professional online image of your company. The website includes company information, services, projects, news, blog, and contact section.\n\nThe website is SEO optimized, loads quickly, and works perfectly on all devices. With modern design, animations, and interactive elements, you attract customer attention.\n\nThe website includes integrated CRM, analytics, and marketing tools. With content management system (CMS), you can update the website yourself and add new sections.\n\nCorporate website is used in various sectors: IT companies, consulting, service provision, and more. Each website reflects the unique features of your company.\n\nThe website includes news section, blog, project gallery, and contact form. This gives customers complete information about the company.\n\nMobile optimization and high loading speed are important for website success. Our created websites comply with all modern standards and are a convenient and effective solution for customers.",
+    "duration": "Development time: 2-3 weeks",
+    "category": "Corporate"
+  }
+]
+
