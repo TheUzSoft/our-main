@@ -2,7 +2,7 @@ const API_BASE_URL = 'https://api.theuzsoft.uz/api';
 
 /**
  * Fetch all blogs from API
- * @param {string} lang - Language code (uz/ru)
+ * @param {string} lang - Language code (uz/ru/en)
  * @returns {Promise<Array>}
  */
 export const fetchBlogs = async (lang = 'uz') => {
@@ -30,8 +30,8 @@ export const fetchBlogs = async (lang = 'uz') => {
 
 /**
  * Fetch single blog by slug from API
- * @param {string} slug - Blog slug
- * @param {string} lang - Language code (uz/ru)
+ * @param {string} slug - Blog slug (same slug for all languages)
+ * @param {string} lang - Language code (uz/ru/en)
  * @returns {Promise<Object>}
  */
 export const fetchBlogBySlug = async (slug, lang = 'uz') => {

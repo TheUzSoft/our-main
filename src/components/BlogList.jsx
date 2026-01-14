@@ -42,10 +42,14 @@ const BlogList = () => {
   useEffect(() => {
     const currentLang = lang || language;
     const title = currentLang === 'uz' 
-      ? 'Blog | TheUzSoft — IT yechimlar va loyihalar' 
+      ? 'Blog | TheUzSoft — IT yechimlar va loyihalar'
+      : currentLang === 'en'
+      ? 'Blog | TheUzSoft — IT Solutions and Projects'
       : 'Блог | TheUzSoft — IT решения и проекты';
     const description = currentLang === 'uz'
       ? 'IT sohasidagi eng so\'nggi yangiliklar, loyihalar va texnologiyalar. TheUzSoft kompaniyasining professional blogi.'
+      : currentLang === 'en'
+      ? 'Latest news, projects, and technologies in the IT field. Professional blog of TheUzSoft company.'
       : 'Последние новости, проекты и технологии в сфере IT. Профессиональный блог компании TheUzSoft.';
     
     document.title = title;
@@ -115,7 +119,7 @@ const BlogList = () => {
         <div className="container mx-auto text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-gray-600 dark:text-gray-400">
-            {language === 'uz' ? 'Yuklanmoqda...' : 'Загрузка...'}
+            {language === 'uz' ? 'Yuklanmoqda...' : language === 'en' ? 'Loading...' : 'Загрузка...'}
           </p>
         </div>
       </section>
@@ -128,14 +132,14 @@ const BlogList = () => {
       <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24 flex items-center justify-center">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl font-bold text-black dark:text-white mb-4">
-            {language === 'uz' ? 'Xatolik yuz berdi' : 'Произошла ошибка'}
+            {language === 'uz' ? 'Xatolik yuz berdi' : language === 'en' ? 'An error occurred' : 'Произошла ошибка'}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
-            {language === 'uz' ? 'Qayta urinish' : 'Попробовать снова'}
+            {language === 'uz' ? 'Qayta urinish' : language === 'en' ? 'Try again' : 'Попробовать снова'}
           </button>
         </div>
       </section>
@@ -153,11 +157,13 @@ const BlogList = () => {
           className="text-center mb-12 md:mb-16"
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-inter text-black dark:text-white mb-4 tracking-tight">
-            {t('blog.title') || (language === 'uz' ? 'Blog' : 'Блог')}
+            {t('blog.title') || (language === 'uz' ? 'Blog' : language === 'en' ? 'Blog' : 'Блог')}
           </h1>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t('blog.subtitle') || (language === 'uz' 
-              ? 'IT sohasidagi eng so\'nggi yangiliklar, loyihalar va texnologiyalar' 
+              ? 'IT sohasidagi eng so\'nggi yangiliklar, loyihalar va texnologiyalar'
+              : language === 'en'
+              ? 'Latest news, projects, and technologies in the IT field'
               : 'Последние новости, проекты и технологии в сфере IT')}
           </p>
         </motion.div>
@@ -166,7 +172,7 @@ const BlogList = () => {
         {blogs.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400 text-lg">
-              {language === 'uz' ? 'Maqolalar topilmadi' : 'Статьи не найдены'}
+              {language === 'uz' ? 'Maqolalar topilmadi' : language === 'en' ? 'No articles found' : 'Статьи не найдены'}
             </p>
           </div>
         ) : (
@@ -252,7 +258,7 @@ const BlogList = () => {
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            {t('blog.backToHome') || (language === 'uz' ? 'Bosh sahifaga qaytish' : 'Вернуться на главную')}
+            {t('blog.backToHome') || (language === 'uz' ? 'Bosh sahifaga qaytish' : language === 'en' ? 'Back to home' : 'Вернуться на главную')}
           </Link>
         </motion.div>
       </div>

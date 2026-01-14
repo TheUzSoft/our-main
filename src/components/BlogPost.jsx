@@ -109,7 +109,7 @@ const BlogPost = () => {
         <div className="container mx-auto text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-gray-600 dark:text-gray-400">
-            {language === 'uz' ? 'Yuklanmoqda...' : 'Загрузка...'}
+            {language === 'uz' ? 'Yuklanmoqda...' : language === 'en' ? 'Loading...' : 'Загрузка...'}
           </p>
         </div>
       </section>
@@ -122,18 +122,20 @@ const BlogPost = () => {
       <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center pt-32 md:pt-40">
         <div className="container mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">
-            {language === 'uz' ? 'Maqola topilmadi' : 'Статья не найдена'}
+            {language === 'uz' ? 'Maqola topilmadi' : language === 'en' ? 'Article not found' : 'Статья не найдена'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
             {language === 'uz' 
-              ? 'Kechirasiz, siz qidirayotgan maqola topilmadi.' 
+              ? 'Kechirasiz, siz qidirayotgan maqola topilmadi.'
+              : language === 'en'
+              ? 'Sorry, the article you are looking for was not found.'
               : 'Извините, запрашиваемая статья не найдена.'}
           </p>
           <Link
             to={`/${lang || language}/blog`}
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
-            {language === 'uz' ? 'Blogga qaytish' : 'Вернуться в блог'}
+            {language === 'uz' ? 'Blogga qaytish' : language === 'en' ? 'Back to blog' : 'Вернуться в блог'}
           </Link>
         </div>
       </section>
@@ -145,20 +147,20 @@ const BlogPost = () => {
       <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center pt-32 md:pt-40">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl font-bold text-black dark:text-white mb-4">
-            {language === 'uz' ? 'Xatolik yuz berdi' : 'Произошла ошибка'}
+            {language === 'uz' ? 'Xatolik yuz berdi' : language === 'en' ? 'An error occurred' : 'Произошла ошибка'}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors mr-4"
           >
-            {language === 'uz' ? 'Qayta urinish' : 'Попробовать снова'}
+            {language === 'uz' ? 'Qayta urinish' : language === 'en' ? 'Try again' : 'Попробовать снова'}
           </button>
           <Link
             to={`/${lang || language}/blog`}
             className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
           >
-            {language === 'uz' ? 'Blogga qaytish' : 'Вернуться в блог'}
+            {language === 'uz' ? 'Blogga qaytish' : language === 'en' ? 'Back to blog' : 'Вернуться в блог'}
           </Link>
         </div>
       </section>
@@ -277,12 +279,16 @@ const BlogPost = () => {
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 sm:p-8">
               <h3 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
                 {language === 'uz' 
-                  ? 'Loyihangizni boshlashga tayyormisiz?' 
+                  ? 'Loyihangizni boshlashga tayyormisiz?'
+                  : language === 'en'
+                  ? 'Ready to start your project?'
                   : 'Готовы начать свой проект?'}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                 {language === 'uz'
                   ? 'Bizning mutaxassislarimiz bilan bog\'laning va loyihangizni muhokama qiling.'
+                  : language === 'en'
+                  ? 'Contact our specialists and discuss your project.'
                   : 'Свяжитесь с нашими специалистами и обсудите ваш проект.'}
               </p>
               <Link
@@ -302,7 +308,7 @@ const BlogPost = () => {
                 }}
                 className="inline-block px-8 py-4 bg-primary text-white rounded-lg font-semibold text-base transition-colors hover:bg-primary/90"
               >
-                {t('blog.contactUs') || (language === 'uz' ? 'Bog\'lanish' : 'Связаться с нами')}
+                {t('blog.contactUs') || (language === 'uz' ? 'Bog\'lanish' : language === 'en' ? 'Contact us' : 'Связаться с нами')}
               </Link>
             </div>
           </motion.div>
