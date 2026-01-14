@@ -13,19 +13,34 @@ export const useDarkMode = () => {
 export const DarkModeProvider = ({ children }) => {
   // Check localStorage for saved preference, default to false (light mode)
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
-    return saved ? JSON.parse(saved) : false;
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const saved = localStorage.getItem('darkMode');
+        return saved ? JSON.parse(saved) : false;
+      }
+    } catch (error) {
+      console.warn('Failed to read from localStorage:', error);
+    }
+    return false;
   });
 
   // Update localStorage when dark mode changes
   useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+      }
+    } catch (error) {
+      console.warn('Failed to write to localStorage:', error);
+    }
     
     // Add or remove 'dark' class from document element
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    if (typeof document !== 'undefined') {
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   }, [isDarkMode]);
 

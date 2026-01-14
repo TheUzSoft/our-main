@@ -14,13 +14,13 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-  const { lang } = useParams();
+  const { lang } = useParams() || {};
   const navigate = useNavigate();
   const location = useLocation();
   
   // Get language from URL, default to 'ru' if not in URL
   const currentLang = (lang && ['uz', 'ru'].includes(lang)) ? lang : 'ru';
-  const [language, setLanguage] = useState(currentLang);
+  const [language, setLanguage] = useState(() => currentLang);
 
   // Update language when URL changes
   useEffect(() => {
@@ -61,7 +61,9 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     // Update HTML lang attribute
-    document.documentElement.lang = language;
+    if (typeof document !== 'undefined' && document.documentElement) {
+      document.documentElement.lang = language;
+    }
   }, [language]);
 
   return (

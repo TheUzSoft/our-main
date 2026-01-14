@@ -3,14 +3,13 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    historyApiFallback: true,
-  },
   build: {
     rollupOptions: {
       output: {
         manualChunks: undefined,
       },
     },
+    assetsDir: 'assets',
+    outDir: 'dist',
   },
 })
