@@ -1,30 +1,52 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { fetchBrandLogos } from '../utils/brandsApi';
 
 const Clients = () => {
   const { t } = useLanguage();
+  const [dynamicLogos, setDynamicLogos] = useState([]);
 
-  // Client brand logos
-  const clients = [
-    { id: 1, name: 'BioClean', logo: '/images/bioclean.jpg' },
-    { id: 2, name: 'BuyPin', logo: '/images/buypin.jpg' },
-    { id: 3, name: 'ChustBurger', logo: '/images/chustburger.jpg' },
-    { id: 4, name: 'Elbop', logo: '/images/elbop.jpg' },
-    { id: 5, name: 'FazoLive', logo: '/images/fazolive.PNG' },
-    { id: 6, name: 'Frossh', logo: '/images/frossh.png' },
-    { id: 7, name: 'FTTextile', logo: '/images/fttextile.jpg' },
-    { id: 8, name: 'IDonate', logo: '/images/idonate.png' },
-    { id: 9, name: 'Kebyo', logo: '/images/kebyo.png' },
-    { id: 10, name: 'KSM', logo: '/images/ksm.png' },
-    { id: 11, name: 'OSAGO', logo: '/images/osago.png' },
-    { id: 12, name: 'RoyalTaxi', logo: '/images/royaltaxi.jpg' },
-    { id: 13, name: 'SeenSMS', logo: '/images/seensms.png' },
-    { id: 14, name: 'UzTelecom', logo: '/images/uztelecom.png' },
-    { id: 15, name: 'SofyMart', logo: '/images/sofymart.png' },
+  // Static brand logos - ALWAYS visible, never removed
+  const staticClients = [
+    { id: 'static-1', name: 'BioClean', logo: '/images/bioclean.jpg', link: null },
+    { id: 'static-2', name: 'BuyPin', logo: '/images/buypin.jpg', link: null },
+    { id: 'static-3', name: 'ChustBurger', logo: '/images/chustburger.jpg', link: null },
+    { id: 'static-4', name: 'Elbop', logo: '/images/elbop.jpg', link: null },
+    { id: 'static-5', name: 'FazoLive', logo: '/images/fazolive.PNG', link: null },
+    { id: 'static-6', name: 'Frossh', logo: '/images/frossh.png', link: null },
+    { id: 'static-7', name: 'FTTextile', logo: '/images/fttextile.jpg', link: null },
+    { id: 'static-8', name: 'IDonate', logo: '/images/idonate.png', link: null },
+    { id: 'static-9', name: 'Kebyo', logo: '/images/kebyo.png', link: null },
+    { id: 'static-10', name: 'KSM', logo: '/images/ksm.png', link: null },
+    { id: 'static-11', name: 'OSAGO', logo: '/images/osago.png', link: null },
+    { id: 'static-12', name: 'RoyalTaxi', logo: '/images/royaltaxi.jpg', link: null },
+    { id: 'static-13', name: 'SeenSMS', logo: '/images/seensms.png', link: null },
+    { id: 'static-14', name: 'UzTelecom', logo: '/images/uztelecom.png', link: null },
+    { id: 'static-15', name: 'SofyMart', logo: '/images/sofymart.png', link: null },
   ];
 
+  // Fetch dynamic logos from API
+  useEffect(() => {
+    const loadDynamicLogos = async () => {
+      try {
+        const logos = await fetchBrandLogos();
+        setDynamicLogos(logos);
+      } catch (error) {
+        // Silently fail - static logos will still be displayed
+        console.warn('Failed to load dynamic logos:', error);
+      }
+    };
+
+    loadDynamicLogos();
+  }, []);
+
+  // Combine static and dynamic logos
+  // Static logos always come first, then dynamic logos
+  const allClients = [...staticClients, ...dynamicLogos];
+
   // Duplicate clients for seamless infinite loop
-  const duplicatedClients = [...clients, ...clients];
+  const duplicatedClients = [...allClients, ...allClients];
 
   return (
     <section
@@ -55,23 +77,41 @@ const Clients = () => {
 
           {/* Sliding carousel */}
           <div className="flex clients-carousel">
-            {duplicatedClients.map((client, index) => (
-              <div
-                key={`${client.id}-${index}`}
-                className="flex-shrink-0 mx-1.5 sm:mx-3 md:mx-4 lg:mx-6 xl:mx-8"
-              >
-                <div className="w-[180px] h-[100px] sm:w-[250px] sm:h-[140px] flex items-center justify-center bg-white dark:bg-[#14151b] border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-5 transition-colors duration-200 hover:border-gray-300 dark:hover:border-gray-600">
+            {duplicatedClients.map((client, index) => {
+              const logoCard = (
+                <div className="w-[180px] h-[100px] sm:w-[200px] sm:h-[110px] md:w-[220px] md:h-[120px] lg:w-[250px] lg:h-[140px] flex items-center justify-center bg-white dark:bg-[#14151b] border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 group">
                   <img
                     src={client.logo}
-                    alt={client.name}
-                    className="max-w-full max-h-full object-contain opacity-60 hover:opacity-100 transition-opacity duration-200 grayscale hover:grayscale-0"
+                    alt={client.name || 'Brand logo'}
+                    className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
                     loading="lazy"
                     width="250"
                     height="140"
                   />
                 </div>
-              </div>
-            ))}
+              );
+
+              return (
+                <div
+                  key={`${client.id}-${index}`}
+                  className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3 lg:mx-4 xl:mx-6"
+                >
+                  {client.link ? (
+                    <a
+                      href={client.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                      aria-label={`Visit ${client.name || 'brand'} website`}
+                    >
+                      {logoCard}
+                    </a>
+                  ) : (
+                    logoCard
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
