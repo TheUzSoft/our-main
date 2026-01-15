@@ -28,7 +28,29 @@ const BlogList = () => {
         }
       } catch (err) {
         console.error('Failed to load blogs:', err);
-        setError(err.message || 'Failed to load blogs');
+        const currentLang = lang || language;
+        // Provide user-friendly error messages in the current language
+        let errorMessage = 'Failed to load blogs';
+        if (err.message && err.message.includes('404')) {
+          errorMessage = currentLang === 'uz' 
+            ? 'Blog maqolalari topilmadi'
+            : currentLang === 'en'
+            ? 'Blog articles not found'
+            : 'Статьи блога не найдены';
+        } else if (err.message && err.message.includes('Network') || err.message && err.message.includes('fetch')) {
+          errorMessage = currentLang === 'uz'
+            ? 'Internet aloqasi bilan muammo. Iltimos, internet aloqasini tekshiring.'
+            : currentLang === 'en'
+            ? 'Network connection problem. Please check your internet connection.'
+            : 'Проблема с подключением к сети. Пожалуйста, проверьте подключение к интернету.';
+        } else {
+          errorMessage = currentLang === 'uz'
+            ? 'Maqolalarni yuklashda xatolik yuz berdi. Iltimos, sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
+            : currentLang === 'en'
+            ? 'An error occurred while loading articles. Please refresh the page or try again later.'
+            : 'Произошла ошибка при загрузке статей. Пожалуйста, обновите страницу или попробуйте позже.';
+        }
+        setError(errorMessage);
         setBlogs([]);
       } finally {
         setLoading(false);
@@ -136,7 +158,32 @@ const BlogList = () => {
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              setError(null);
+              setLoading(true);
+              const currentLang = lang || language;
+              fetchBlogs(currentLang)
+                .then((blogData) => {
+                  if (blogData && blogData.length > 0) {
+                    const sortedBlogs = sortBlogsByDate(blogData);
+                    setBlogs(sortedBlogs);
+                  } else {
+                    setBlogs([]);
+                  }
+                })
+                .catch((err) => {
+                  console.error('Failed to load blogs:', err);
+                  const errorMessage = currentLang === 'uz'
+                    ? 'Maqolalarni yuklashda xatolik yuz berdi. Iltimos, sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
+                    : currentLang === 'en'
+                    ? 'An error occurred while loading articles. Please refresh the page or try again later.'
+                    : 'Произошла ошибка при загрузке статей. Пожалуйста, обновите страницу или попробуйте позже.';
+                  setError(errorMessage);
+                })
+                .finally(() => {
+                  setLoading(false);
+                });
+            }}
             className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
             {language === 'uz' ? 'Qayta urinish' : language === 'en' ? 'Try again' : 'Попробовать снова'}

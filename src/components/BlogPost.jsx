@@ -28,10 +28,26 @@ const BlogPost = () => {
         }
       } catch (err) {
         console.error('Failed to load blog:', err);
+        const currentLang = lang || language;
         if (err.message && err.message.includes('404')) {
           setError('not_found');
         } else {
-          setError(err.message || 'Failed to load blog');
+          // Provide user-friendly error messages in the current language
+          let errorMessage = 'Failed to load blog';
+          if (err.message && err.message.includes('Network') || err.message && err.message.includes('fetch')) {
+            errorMessage = currentLang === 'uz'
+              ? 'Internet aloqasi bilan muammo. Iltimos, internet aloqasini tekshiring.'
+              : currentLang === 'en'
+              ? 'Network connection problem. Please check your internet connection.'
+              : 'Проблема с подключением к сети. Пожалуйста, проверьте подключение к интернету.';
+          } else {
+            errorMessage = currentLang === 'uz'
+              ? 'Maqolani yuklashda xatolik yuz berdi. Iltimos, sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
+              : currentLang === 'en'
+              ? 'An error occurred while loading the article. Please refresh the page or try again later.'
+              : 'Произошла ошибка при загрузке статьи. Пожалуйста, обновите страницу или попробуйте позже.';
+          }
+          setError(errorMessage);
         }
         setBlog(null);
       } finally {

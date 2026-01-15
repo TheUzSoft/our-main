@@ -16,7 +16,16 @@ export const fetchBlogs = async (lang = 'uz') => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Provide more specific error messages
+      if (response.status === 404) {
+        throw new Error('404: Blogs not found');
+      } else if (response.status === 500) {
+        throw new Error('500: Server error');
+      } else if (response.status >= 400 && response.status < 500) {
+        throw new Error(`HTTP ${response.status}: Client error`);
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     }
 
     const data = await response.json();
@@ -48,7 +57,14 @@ export const fetchBlogBySlug = async (slug, lang = 'uz') => {
       if (response.status === 404) {
         return null;
       }
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Provide more specific error messages
+      if (response.status === 500) {
+        throw new Error('500: Server error');
+      } else if (response.status >= 400 && response.status < 500) {
+        throw new Error(`HTTP ${response.status}: Client error`);
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     }
 
     const data = await response.json();
