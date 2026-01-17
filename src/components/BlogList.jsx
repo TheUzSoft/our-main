@@ -21,7 +21,7 @@ const BlogList = () => {
         const blogData = await fetchBlogs(currentLang);
         if (blogData && blogData.length > 0) {
           // Filter blogs by language (in case API returns blogs from multiple languages)
-          // Check for lang, language, locale, or language_code field in blog object
+          // Only filter if blog has a language field, otherwise trust API filtering
           const filteredBlogs = blogData.filter((blog) => {
             // Check various possible language field names
             const blogLang = blog.lang || blog.language || blog.locale || blog.language_code || blog.lang_code;
@@ -35,10 +35,8 @@ const BlogList = () => {
             }
             
             // If no language field exists, API should have filtered correctly
-            // But to be safe, only include blogs without language field if we're not filtering strictly
-            // For now, exclude blogs without language field to prevent showing wrong language content
-            // This ensures we only show blogs that match the current language
-            return false;
+            // Trust API and include the blog (API was called with correct lang parameter)
+            return true;
           });
           
           // Sort blogs by date (newest first)
