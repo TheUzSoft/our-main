@@ -20,21 +20,24 @@ const BlogList = () => {
         
         const blogData = await fetchBlogs(currentLang);
         if (blogData && blogData.length > 0) {
-          // Filter blogs by language using text content analysis
-          // Check blog title and content to detect language
+          // Filter blogs by language using content analysis only
+          // Only check blog content (not title or category)
           const filteredBlogs = blogData.filter((blog) => {
-            // Get blog text from title and content
-            const title = (blog.title || '').toLowerCase();
-            const content = extractTextFromHTML(blog.content || '', 500).toLowerCase();
-            const fullText = title + ' ' + content;
+            // Get blog content text only (ignore title and category)
+            const content = extractTextFromHTML(blog.content || '', 2000).toLowerCase();
+            
+            // If no content, include the blog (trust API filtering)
+            if (!content || content.trim().length === 0) {
+              return true;
+            }
             
             // Check for Cyrillic characters (Russian)
-            const hasCyrillic = /[а-яё]/i.test(fullText);
+            const hasCyrillic = /[а-яё]/i.test(content);
             
             // Check for Uzbek-specific characters (o', g', ў, ғ, ҳ, қ, etc.)
-            const hasUzbekChars = /[ўғҳқ]/i.test(fullText) || 
-                                 /o[''`]/i.test(fullText) || 
-                                 /g[''`]/i.test(fullText);
+            const hasUzbekChars = /[ўғҳқ]/i.test(content) || 
+                                 /o[''`]/i.test(content) || 
+                                 /g[''`]/i.test(content);
             
             // Filter based on current language
             if (currentLang === 'uz') {
