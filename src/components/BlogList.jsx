@@ -20,8 +20,52 @@ const BlogList = () => {
         
         const blogData = await fetchBlogs(currentLang);
         if (blogData && blogData.length > 0) {
+          // Filter blogs by language using text content analysis
+          // Check blog title and content to detect language
+          const filteredBlogs = blogData.filter((blog) => {
+            // Get blog text from title and content
+            const title = (blog.title || '').toLowerCase();
+            const content = extractTextFromHTML(blog.content || '', 500).toLowerCase();
+            const fullText = title + ' ' + content;
+            
+            // Check for Cyrillic characters (Russian)
+            const hasCyrillic = /[а-яё]/i.test(fullText);
+            
+            // Check for Uzbek-specific characters (o', g', ў, ғ, ҳ, қ, etc.)
+            const hasUzbekChars = /[ўғҳқ]/i.test(fullText) || 
+                                 /o[''`]/i.test(fullText) || 
+                                 /g[''`]/i.test(fullText);
+            
+            // Filter based on current language
+            if (currentLang === 'uz') {
+              // For Uzbek: exclude if has Cyrillic (Russian) and no Uzbek characters
+              if (hasCyrillic && !hasUzbekChars) {
+                return false; // Exclude Russian-only blogs
+              }
+              // Include Uzbek blogs or blogs without clear language markers
+              return true;
+            } else if (currentLang === 'ru') {
+              // For Russian: exclude if has Uzbek characters
+              if (hasUzbekChars) {
+                return false; // Exclude Uzbek blogs
+              }
+              // Include Russian blogs (has Cyrillic) or blogs without clear markers
+              return true;
+            } else if (currentLang === 'en') {
+              // For English: exclude if has Cyrillic or Uzbek characters
+              if (hasCyrillic || hasUzbekChars) {
+                return false; // Exclude Russian and Uzbek blogs
+              }
+              // Include English blogs (no Cyrillic or Uzbek characters)
+              return true;
+            }
+            
+            // Default: include all (should not reach here)
+            return true;
+          });
+          
           // Sort blogs by date (newest first)
-          const sortedBlogs = sortBlogsByDate(blogData);
+          const sortedBlogs = sortBlogsByDate(filteredBlogs);
           setBlogs(sortedBlogs);
         } else {
           setBlogs([]);
