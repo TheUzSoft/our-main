@@ -16,12 +16,33 @@ const BlogList = () => {
       try {
         setLoading(true);
         setError(null);
-        const currentLang = lang || language;
+        const currentLang = lang || language || 'ru';
         
         const blogData = await fetchBlogs(currentLang);
         if (blogData && blogData.length > 0) {
+          // Filter blogs by language (in case API returns blogs from multiple languages)
+          // Check for lang, language, locale, or language_code field in blog object
+          const filteredBlogs = blogData.filter((blog) => {
+            // Check various possible language field names
+            const blogLang = blog.lang || blog.language || blog.locale || blog.language_code || blog.lang_code;
+            
+            // If blog has a language field, filter by it
+            if (blogLang) {
+              // Normalize language codes (handle variations like 'uz', 'uz_UZ', 'uz-UZ')
+              const normalizedBlogLang = blogLang.toLowerCase().split(/[-_]/)[0];
+              const normalizedCurrentLang = currentLang.toLowerCase().split(/[-_]/)[0];
+              return normalizedBlogLang === normalizedCurrentLang;
+            }
+            
+            // If no language field exists, API should have filtered correctly
+            // But to be safe, only include blogs without language field if we're not filtering strictly
+            // For now, exclude blogs without language field to prevent showing wrong language content
+            // This ensures we only show blogs that match the current language
+            return false;
+          });
+          
           // Sort blogs by date (newest first)
-          const sortedBlogs = sortBlogsByDate(blogData);
+          const sortedBlogs = sortBlogsByDate(filteredBlogs);
           setBlogs(sortedBlogs);
         } else {
           setBlogs([]);
