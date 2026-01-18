@@ -6,47 +6,31 @@ import { fetchBrandLogos } from '../utils/brandsApi';
 const Clients = () => {
   const { t } = useLanguage();
   const [dynamicLogos, setDynamicLogos] = useState([]);
-
-  // Static brand logos - ALWAYS visible, never removed
-  const staticClients = [
-    { id: 'static-1', name: 'BioClean', logo: '/images/bioclean.jpg', link: null },
-    { id: 'static-2', name: 'BuyPin', logo: '/images/buypin.jpg', link: null },
-    { id: 'static-3', name: 'ChustBurger', logo: '/images/chustburger.jpg', link: null },
-    { id: 'static-4', name: 'Elbop', logo: '/images/elbop.jpg', link: null },
-    { id: 'static-5', name: 'FazoLive', logo: '/images/fazolive.PNG', link: null },
-    { id: 'static-6', name: 'Frossh', logo: '/images/frossh.png', link: null },
-    { id: 'static-7', name: 'FTTextile', logo: '/images/fttextile.jpg', link: null },
-    { id: 'static-8', name: 'IDonate', logo: '/images/idonate.png', link: null },
-    { id: 'static-9', name: 'Kebyo', logo: '/images/kebyo.png', link: null },
-    { id: 'static-10', name: 'KSM', logo: '/images/ksm.png', link: null },
-    { id: 'static-11', name: 'OSAGO', logo: '/images/osago.png', link: null },
-    { id: 'static-12', name: 'RoyalTaxi', logo: '/images/royaltaxi.jpg', link: null },
-    { id: 'static-13', name: 'SeenSMS', logo: '/images/seensms.png', link: null },
-    { id: 'static-14', name: 'UzTelecom', logo: '/images/uztelecom.png', link: null },
-    { id: 'static-15', name: 'SofyMart', logo: '/images/sofymart.png', link: null },
-  ];
+  const [loading, setLoading] = useState(true);
 
   // Fetch dynamic logos from API
   useEffect(() => {
     const loadDynamicLogos = async () => {
       try {
+        setLoading(true);
         const logos = await fetchBrandLogos();
         setDynamicLogos(logos);
       } catch (error) {
-        // Silently fail - static logos will still be displayed
-        console.warn('Failed to load dynamic logos:', error);
+        console.error('Failed to load dynamic logos:', error);
+        setDynamicLogos([]);
+      } finally {
+        setLoading(false);
       }
     };
 
     loadDynamicLogos();
   }, []);
 
-  // Combine static and dynamic logos
-  // Static logos always come first, then dynamic logos
-  const allClients = [...staticClients, ...dynamicLogos];
+  // Use only dynamic logos from database
+  const allClients = dynamicLogos;
 
-  // Duplicate clients for seamless infinite loop
-  const duplicatedClients = [...allClients, ...allClients];
+  // Duplicate clients for seamless infinite loop (only if we have clients)
+  const duplicatedClients = allClients.length > 0 ? [...allClients, ...allClients] : [];
 
   return (
     <section
@@ -76,43 +60,68 @@ const Clients = () => {
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-20 md:w-24 lg:w-32 bg-gradient-to-l from-white dark:from-[#14151b] via-white dark:via-[#14151b] to-transparent z-10 pointer-events-none" />
 
           {/* Sliding carousel */}
-          <div className="flex clients-carousel">
-            {duplicatedClients.map((client, index) => {
-              const logoCard = (
-                <div className="w-[180px] h-[100px] sm:w-[200px] sm:h-[110px] md:w-[220px] md:h-[120px] lg:w-[250px] lg:h-[140px] flex items-center justify-center bg-white dark:bg-[#14151b] border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 group">
-                  <img
-                    src={client.logo}
-                    alt={client.name || 'Brand logo'}
-                    className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                    loading="lazy"
-                    width="250"
-                    height="140"
-                  />
-                </div>
-              );
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="text-gray-600 dark:text-gray-400">Loading...</div>
+            </div>
+          ) : allClients.length === 0 ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="text-gray-600 dark:text-gray-400">No brands available</div>
+            </div>
+          ) : (
+            <div className="flex clients-carousel">
+              {duplicatedClients.map((client, index) => {
+                // Ensure logo URL is properly formatted
+                const logoUrl = client.logo 
+                  ? (client.logo.startsWith('http') 
+                      ? client.logo 
+                      : `https://api.theuzsoft.uz${client.logo.startsWith('/') ? client.logo : '/' + client.logo}`)
+                  : null;
 
-              return (
-                <div
-                  key={`${client.id}-${index}`}
-                  className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3 lg:mx-4 xl:mx-6"
-                >
-                  {client.link ? (
-                    <a
-                      href={client.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block"
-                      aria-label={`Visit ${client.name || 'brand'} website`}
-                    >
-                      {logoCard}
-                    </a>
-                  ) : (
-                    logoCard
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                const logoCard = (
+                  <div className="w-[180px] h-[100px] sm:w-[200px] sm:h-[110px] md:w-[220px] md:h-[120px] lg:w-[250px] lg:h-[140px] flex items-center justify-center bg-white dark:bg-[#14151b] border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 group">
+                    {logoUrl ? (
+                      <img
+                        src={logoUrl}
+                        alt={client.name || 'Brand logo'}
+                        className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+                        loading="lazy"
+                        width="250"
+                        height="140"
+                        onError={(e) => {
+                          console.error('Failed to load image:', logoUrl);
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                    ) : (
+                      <div className="text-gray-400 text-sm">No image</div>
+                    )}
+                  </div>
+                );
+
+                return (
+                  <div
+                    key={`${client.id}-${index}`}
+                    className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3 lg:mx-4 xl:mx-6"
+                  >
+                    {client.link ? (
+                      <a
+                        href={client.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                        aria-label={`Visit ${client.name || 'brand'} website`}
+                      >
+                        {logoCard}
+                      </a>
+                    ) : (
+                      logoCard
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>

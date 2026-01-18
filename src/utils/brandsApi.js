@@ -34,12 +34,13 @@ export const fetchBrandLogos = async () => {
     }
     
     // Map API response to our format
-    // API returns: [{ image: 'url', link: 'optional_url' }] or just ['url', 'url']
+    // API returns: [{ image: 'url', name: 'name', link: 'optional_url' }] or just ['url', 'url']
     return logos.map((logo, index) => {
       if (typeof logo === 'string') {
         // If logo is just a string URL
         return {
           id: `dynamic-${index}`,
+          name: null,
           logo: logo,
           link: null,
         };
@@ -47,6 +48,7 @@ export const fetchBrandLogos = async () => {
         // If logo is an object with image property
         return {
           id: `dynamic-${logo.id || index}`,
+          name: logo.name || null,
           logo: logo.image,
           link: logo.link || null,
         };
@@ -54,6 +56,7 @@ export const fetchBrandLogos = async () => {
         // If logo is an object with logo property
         return {
           id: `dynamic-${logo.id || index}`,
+          name: logo.name || null,
           logo: logo.logo,
           link: logo.link || null,
         };
