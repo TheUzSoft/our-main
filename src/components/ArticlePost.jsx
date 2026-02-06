@@ -201,19 +201,21 @@ const ArticlePost = () => {
           </h1>
 
           {coverImageUrl && (
-            <div className="mb-10">
-              <img
-                src={coverImageUrl}
-                alt={article.title}
-                className="w-full h-auto rounded-xl object-cover"
-                loading="lazy"
-              />
+            <div className="mb-10 max-w-2xl mx-auto">
+              <div className="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
+                <img
+                  src={coverImageUrl}
+                  alt={article.title}
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
             </div>
           )}
 
           {body && (
             <div
-              className="prose prose-lg max-w-none mb-12 dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-primary prose-img:rounded-xl"
+              className="prose prose-lg max-w-none mb-12 dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-primary prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:mx-auto"
               style={{ lineHeight: '1.8', letterSpacing: '0.01em' }}
             >
               {body.includes('<') && body.includes('>') ? (
