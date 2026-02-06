@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -13,6 +13,7 @@ const ArticlePost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const lightboxScrollRef = useRef(null);
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -61,6 +62,11 @@ const ArticlePost = () => {
       document.body.style.overflow = '';
     };
   }, [lightboxIndex, closeLightbox]);
+
+  useEffect(() => {
+    if (lightboxIndex === null || !lightboxScrollRef.current) return;
+    lightboxScrollRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [lightboxIndex]);
 
   useEffect(() => {
     if (article) {
@@ -269,20 +275,22 @@ const ArticlePost = () => {
               <AnimatePresence>
                 {lightboxIndex !== null && (
                   <motion.div
+                    ref={lightboxScrollRef}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+                    className="fixed inset-0 z-[100] flex flex-col bg-black/90 overflow-y-auto overflow-x-hidden overscroll-contain"
                     onClick={closeLightbox}
                     role="dialog"
                     aria-modal="true"
                     aria-label={language === 'uz' ? 'Rasmni yopish' : language === 'en' ? 'Close image' : 'Закрыть изображение'}
                   >
+                    <div className="flex-1 min-h-0 flex items-center justify-center p-4 pt-14 pb-16">
                     <button
                       type="button"
                       onClick={closeLightbox}
-                      className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                      className="fixed top-4 right-4 z-[101] p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
                       aria-label={language === 'uz' ? 'Yopish' : language === 'en' ? 'Close' : 'Закрыть'}
                     >
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -293,7 +301,7 @@ const ArticlePost = () => {
                       <button
                         type="button"
                         onClick={(e) => { e.stopPropagation(); setLightboxIndex(lightboxIndex - 1); }}
-                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                        className="fixed left-2 sm:left-4 top-1/2 -translate-y-1/2 z-[101] p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
                         aria-label={language === 'uz' ? 'Oldingi' : language === 'en' ? 'Previous' : 'Предыдущее'}
                       >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -305,7 +313,7 @@ const ArticlePost = () => {
                       <button
                         type="button"
                         onClick={(e) => { e.stopPropagation(); setLightboxIndex(lightboxIndex + 1); }}
-                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                        className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[101] p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
                         aria-label={language === 'uz' ? 'Keyingi' : language === 'en' ? 'Next' : 'Следующее'}
                       >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,19 +327,20 @@ const ArticlePost = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="relative max-w-[90vw] max-h-[85vh] flex items-center justify-center"
+                      className="relative max-w-[90vw] max-h-[85vh] min-h-[200px] flex items-center justify-center shrink-0"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <img
                         src={imageUrls[lightboxIndex]}
                         alt={article.title ? `${article.title} – ${lightboxIndex + 1}` : `Rasm ${lightboxIndex + 1}`}
-                        className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+                        className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg select-none"
                         draggable={false}
                       />
                     </motion.div>
-                    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80 text-sm">
+                    <span className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[101] text-white/80 text-sm pointer-events-none">
                       {lightboxIndex + 1} / {imageUrls.length}
                     </span>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
