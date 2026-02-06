@@ -5,6 +5,7 @@
     "clients": "Клиенты",
     "about": "О нас",
     "blog": "Бизнес решения",
+    "articles": "Статьи",
     "contact": "Контакты",
     "quickLinks": "Быстрые ссылки"
   },
@@ -115,6 +116,16 @@
     "rights": "Все права защищены",
     "company": "TheUzSoft",
     "email": "Email"
+  },
+  "articles": {
+    "title": "Статьи",
+    "subtitle": "Полезные статьи и материалы",
+    "readMore": "Читать далее",
+    "backToArticles": "Вернуться к статьям",
+    "backToHome": "Вернуться на главную",
+    "contactUs": "Связаться с нами",
+    "contactUsTitle": "Готовы начать свой проект?",
+    "contactUsSubtitle": "Свяжитесь с нами и получите бесплатную консультацию"
   },
   "blog": {
     "title": "Бизнес решения",

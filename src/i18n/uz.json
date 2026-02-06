@@ -5,6 +5,7 @@
     "clients": "Mijozlar",
     "about": "Biz haqimizda",
     "blog": "Biznes yechimlar",
+    "articles": "Maqolalar",
     "contact": "Aloqa",
     "quickLinks": "Tezkor havolalar"
   },
@@ -115,6 +116,16 @@
     "rights": "Barcha huquqlar himoyalangan",
     "company": "TheUzSoft",
     "email": "Email"
+  },
+  "articles": {
+    "title": "Maqolalar",
+    "subtitle": "Foydali maqolalar va materiallar",
+    "readMore": "Batafsil",
+    "backToArticles": "Maqolalarga qaytish",
+    "backToHome": "Bosh sahifaga qaytish",
+    "contactUs": "Bog'lanish",
+    "contactUsTitle": "Loyihangizni boshlashga tayyormisiz?",
+    "contactUsSubtitle": "Biz bilan bog'laning va bepul konsultatsiya oling"
   },
   "blog": {
     "title": "Biznes yechimlar",

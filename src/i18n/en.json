@@ -5,6 +5,7 @@
     "clients": "Clients",
     "about": "About",
     "blog": "Business solutions",
+    "articles": "Articles",
     "contact": "Contact",
     "quickLinks": "Quick Links"
   },
@@ -115,6 +116,16 @@
     "rights": "All rights reserved",
     "company": "TheUzSoft",
     "email": "Email"
+  },
+  "articles": {
+    "title": "Articles",
+    "subtitle": "Useful articles and materials",
+    "readMore": "Read More",
+    "backToArticles": "Back to Articles",
+    "backToHome": "Back to Home",
+    "contactUs": "Contact Us",
+    "contactUsTitle": "Ready to Start Your Project?",
+    "contactUsSubtitle": "Contact us and get a free consultation"
   },
   "blog": {
     "title": "Business solutions",
