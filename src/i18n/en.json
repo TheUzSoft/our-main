@@ -4,7 +4,7 @@
     "services": "Services",
     "clients": "Clients",
     "about": "About",
-    "blog": "Blog",
+    "blog": "Business solutions",
     "contact": "Contact",
     "quickLinks": "Quick Links"
   },
@@ -117,7 +117,7 @@
     "email": "Email"
   },
   "blog": {
-    "title": "Blog",
+    "title": "Business solutions",
     "subtitle": "Latest news, projects and technologies in IT",
     "readMore": "Read More",
     "backToBlog": "Back to Blog",

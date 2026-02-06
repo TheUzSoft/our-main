@@ -4,7 +4,7 @@
     "services": "Xizmatlar",
     "clients": "Mijozlar",
     "about": "Biz haqimizda",
-    "blog": "Blog",
+    "blog": "Biznes yechimlar",
     "contact": "Aloqa",
     "quickLinks": "Tezkor havolalar"
   },
@@ -117,7 +117,7 @@
     "email": "Email"
   },
   "blog": {
-    "title": "Blog",
+    "title": "Biznes yechimlar",
     "subtitle": "IT sohasidagi eng so'nggi yangiliklar, loyihalar va texnologiyalar",
     "readMore": "Batafsil",
     "backToBlog": "Blogga qaytish",
