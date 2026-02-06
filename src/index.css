@@ -82,6 +82,19 @@
   }
 }
 
+/* Maqola matni – uzun qatorlar konteynerdan chiqmasin, yangi qatorga tushadi */
+.prose {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.prose p,
+.prose li,
+.prose td,
+.prose th {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 /* Custom animations */
 @keyframes fadeInUp {
   from {

@@ -212,8 +212,8 @@ const ArticlePost = () => {
   const imageUrls = getAllImageUrls();
 
   return (
-    <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24">
-      <div className="container mx-auto max-w-4xl">
+    <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24 overflow-x-hidden">
+      <div className="container mx-auto max-w-4xl min-w-0">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -340,15 +340,15 @@ const ArticlePost = () => {
 
           {body && (
             <div
-              className="prose prose-lg max-w-none mb-12 dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-primary prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:mx-auto"
+              className="prose prose-lg max-w-none mb-12 dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-primary prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:mx-auto break-words overflow-x-hidden [&_*]:break-words [&_*]:max-w-full"
               style={{ lineHeight: '1.8', letterSpacing: '0.01em' }}
             >
               {body.includes('<') && body.includes('>') ? (
-                <div dangerouslySetInnerHTML={{ __html: body }} />
+                <div className="min-w-0 break-words" dangerouslySetInnerHTML={{ __html: body }} />
               ) : (
-                <div className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-white leading-relaxed whitespace-pre-line space-y-6">
+                <div className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-white leading-relaxed whitespace-pre-line space-y-6 min-w-0 break-words">
                   {body.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="mb-6 last:mb-0">
+                    <p key={index} className="mb-6 last:mb-0 break-words">
                       {paragraph.trim()}
                     </p>
                   ))}
