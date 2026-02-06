@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { fetchArticleBySlug, extractTextFromHTML } from '../utils/articlesApi';
 
@@ -12,6 +12,7 @@ const ArticlePost = () => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -46,6 +47,20 @@ const ArticlePost = () => {
 
     if (slug) loadArticle();
   }, [slug, lang, language]);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const openLightbox = useCallback((index) => setLightboxIndex(index), []);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleEscape = (e) => e.key === 'Escape' && closeLightbox();
+    document.addEventListener('keydown', handleEscape);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [lightboxIndex, closeLightbox]);
 
   useEffect(() => {
     if (article) {
@@ -229,20 +244,98 @@ const ArticlePost = () => {
           </h1>
 
           {imageUrls.length > 0 && (
-            <div className="mb-10 space-y-6">
-              {imageUrls.map((src, index) => (
-                <div key={index} className="max-w-2xl mx-auto">
-                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
+            <>
+              <div className="mb-10 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                {imageUrls.map((src, index) => (
+                  <motion.button
+                    key={index}
+                    type="button"
+                    onClick={() => openLightbox(index)}
+                    className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-[#14151b]"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     <img
                       src={src}
                       alt={article.title ? `${article.title} – ${index + 1}` : `Rasm ${index + 1}`}
                       className="w-full h-full object-cover object-center"
                       loading={index === 0 ? 'eager' : 'lazy'}
                     />
-                  </div>
-                </div>
-              ))}
-            </div>
+                    <span className="absolute inset-0 bg-black/0 hover:bg-black/10 dark:hover:bg-black/20 transition-colors" aria-hidden />
+                  </motion.button>
+                ))}
+              </div>
+
+              <AnimatePresence>
+                {lightboxIndex !== null && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+                    onClick={closeLightbox}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={language === 'uz' ? 'Rasmni yopish' : language === 'en' ? 'Close image' : 'Закрыть изображение'}
+                  >
+                    <button
+                      type="button"
+                      onClick={closeLightbox}
+                      className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                      aria-label={language === 'uz' ? 'Yopish' : language === 'en' ? 'Close' : 'Закрыть'}
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    {lightboxIndex > 0 && (
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setLightboxIndex(lightboxIndex - 1); }}
+                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                        aria-label={language === 'uz' ? 'Oldingi' : language === 'en' ? 'Previous' : 'Предыдущее'}
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                    )}
+                    {lightboxIndex < imageUrls.length - 1 && (
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setLightboxIndex(lightboxIndex + 1); }}
+                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                        aria-label={language === 'uz' ? 'Keyingi' : language === 'en' ? 'Next' : 'Следующее'}
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    )}
+                    <motion.div
+                      key={lightboxIndex}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="relative max-w-[90vw] max-h-[85vh] flex items-center justify-center"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <img
+                        src={imageUrls[lightboxIndex]}
+                        alt={article.title ? `${article.title} – ${lightboxIndex + 1}` : `Rasm ${lightboxIndex + 1}`}
+                        className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+                        draggable={false}
+                      />
+                    </motion.div>
+                    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80 text-sm">
+                      {lightboxIndex + 1} / {imageUrls.length}
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
           )}
 
           {body && (
