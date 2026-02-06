@@ -74,7 +74,9 @@ const ArticlePost = () => {
         tag.setAttribute('content', content);
       };
 
-      const imageField = article.image || article.cover_image || article.thumbnail;
+      const firstImg = article.images?.[0] ?? article.gallery?.[0] ?? article.photos?.[0];
+      const imageField = (typeof firstImg === 'string' ? firstImg : firstImg?.url || firstImg?.src || firstImg?.path)
+        || article.image || article.cover_image || article.thumbnail;
       const ogImage = imageField
         ? (imageField.startsWith('http') ? imageField : `https://api.theuzsoft.uz${imageField}`)
         : `${baseUrl}/logo.png`;
@@ -95,11 +97,37 @@ const ArticlePost = () => {
     }
   }, [article, slug, lang, language]);
 
-  const getImageUrl = () => {
-    if (!article) return null;
-    const img = article.image || article.cover_image || article.thumbnail;
-    if (!img) return null;
-    return img.startsWith('http') ? img : `https://api.theuzsoft.uz${img}`;
+  const toFullUrl = (url) => {
+    if (!url) return null;
+    return url.startsWith('http') ? url : `https://api.theuzsoft.uz${url}`;
+  };
+
+  /** Barcha rasmlar: images[], gallery[] yoki bitta image/cover_image/thumbnail */
+  const getAllImageUrls = () => {
+    if (!article) return [];
+    const list = [];
+    if (Array.isArray(article.images) && article.images.length > 0) {
+      article.images.forEach((item) => {
+        const url = typeof item === 'string' ? item : (item?.url || item?.src || item?.path);
+        if (url) list.push(toFullUrl(url));
+      });
+    }
+    if (Array.isArray(article.gallery) && article.gallery.length > 0) {
+      article.gallery.forEach((item) => {
+        const url = typeof item === 'string' ? item : (item?.url || item?.src || item?.path);
+        if (url) list.push(toFullUrl(url));
+      });
+    }
+    if (Array.isArray(article.photos) && article.photos.length > 0) {
+      article.photos.forEach((item) => {
+        const url = typeof item === 'string' ? item : (item?.url || item?.src || item?.path);
+        if (url) list.push(toFullUrl(url));
+      });
+    }
+    if (list.length > 0) return list;
+    const single = article.image || article.cover_image || article.thumbnail;
+    if (single) return [toFullUrl(single)];
+    return [];
   };
 
   if (loading) {
@@ -166,7 +194,7 @@ const ArticlePost = () => {
   }
 
   const body = article.body || article.content || '';
-  const coverImageUrl = getImageUrl();
+  const imageUrls = getAllImageUrls();
 
   return (
     <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24">
@@ -200,16 +228,20 @@ const ArticlePost = () => {
             {article.title}
           </h1>
 
-          {coverImageUrl && (
-            <div className="mb-10 max-w-2xl mx-auto">
-              <div className="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
-                <img
-                  src={coverImageUrl}
-                  alt={article.title}
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-              </div>
+          {imageUrls.length > 0 && (
+            <div className="mb-10 space-y-6">
+              {imageUrls.map((src, index) => (
+                <div key={index} className="max-w-2xl mx-auto">
+                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
+                    <img
+                      src={src}
+                      alt={article.title ? `${article.title} – ${index + 1}` : `Rasm ${index + 1}`}
+                      className="w-full h-full object-cover object-center"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
