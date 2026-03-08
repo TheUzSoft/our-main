@@ -8,6 +8,8 @@ const ArticlesList = () => {
   const { language, t } = useLanguage();
   const { lang } = useParams();
   const [articles, setArticles] = useState([]);
+  const [meta, setMeta] = useState(null);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,9 +19,12 @@ const ArticlesList = () => {
         setLoading(true);
         setError(null);
         const currentLang = lang || language || 'ru';
-        const data = await fetchArticles(currentLang);
-        if (data && data.length > 0) {
-          setArticles(sortArticlesByDate(data));
+        const response = await fetchArticles({ lang: currentLang, page, perPage: 9 });
+        const items = response?.items ?? (Array.isArray(response) ? response : []);
+        const responseMeta = response?.meta ?? null;
+        setMeta(responseMeta);
+        if (items && items.length > 0) {
+          setArticles(sortArticlesByDate(items));
         } else {
           setArticles([]);
         }
@@ -48,12 +53,17 @@ const ArticlesList = () => {
         }
         setError(errorMessage);
         setArticles([]);
+        setMeta(null);
       } finally {
         setLoading(false);
       }
     };
 
     loadArticles();
+  }, [lang, language, page]);
+
+  useEffect(() => {
+    setPage(1);
   }, [lang, language]);
 
   useEffect(() => {
@@ -235,6 +245,31 @@ const ArticlesList = () => {
               );
             })}
           </motion.div>
+        )}
+
+        {meta && (meta.last_page || meta.total || meta.current_page) && (
+          <div className="mt-10 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page <= 1 || loading}
+              className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:border-primary transition-colors"
+            >
+              {language === 'uz' ? 'Oldingi' : language === 'en' ? 'Previous' : 'Предыдущая'}
+            </button>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              {(meta.current_page || page)}
+              {meta.last_page ? ` / ${meta.last_page}` : ''}
+            </div>
+            <button
+              type="button"
+              onClick={() => setPage((p) => p + 1)}
+              disabled={loading || (meta.last_page ? page >= meta.last_page : false)}
+              className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:border-primary transition-colors"
+            >
+              {language === 'uz' ? 'Keyingi' : language === 'en' ? 'Next' : 'Следующая'}
+            </button>
+          </div>
         )}
 
         <motion.div

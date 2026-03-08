@@ -1,13 +1,31 @@
 const API_BASE_URL = 'https://api.theuzsoft.uz/api';
 
+const normalizeArticlesListResponse = (payload) => {
+  if (!payload) return { items: [], meta: null };
+  if (Array.isArray(payload)) return { items: payload, meta: null };
+  const items = Array.isArray(payload.data) ? payload.data : (Array.isArray(payload.items) ? payload.items : []);
+  const meta = payload.meta || payload.pagination || null;
+  return { items, meta };
+};
+
 /**
  * Fetch all articles from API (admin panel)
  * @param {string} lang - Language code (uz/ru/en)
  * @returns {Promise<Array>}
  */
-export const fetchArticles = async (lang = 'uz') => {
+export const fetchArticles = async (params = 'uz') => {
   try {
-    const response = await fetch(`${API_BASE_URL}/articles?lang=${lang}`, {
+    const isLangString = typeof params === 'string';
+    const lang = isLangString ? params : (params?.lang || 'uz');
+    const page = isLangString ? undefined : params?.page;
+    const perPage = isLangString ? undefined : (params?.perPage ?? params?.per_page);
+
+    const searchParams = new URLSearchParams();
+    if (lang) searchParams.set('lang', lang);
+    if (page) searchParams.set('page', String(page));
+    if (perPage) searchParams.set('per_page', String(perPage));
+
+    const response = await fetch(`${API_BASE_URL}/articles?${searchParams.toString()}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +46,7 @@ export const fetchArticles = async (lang = 'uz') => {
     }
 
     const data = await response.json();
-    return data.data || data;
+    return normalizeArticlesListResponse(data);
   } catch (error) {
     console.error('Error fetching articles:', error);
     throw error;
