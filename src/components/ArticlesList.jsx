@@ -44,6 +44,17 @@ const ArticlesList = () => {
             : currentLang === 'en'
             ? 'Network connection problem. Please check your internet connection.'
             : 'Проблема с подключением к сети. Пожалуйста, проверьте подключение к интернету.';
+        } else if (err?.status === 422) {
+          console.error('Articles validation error:', {
+            code: err.code,
+            message: err.message,
+            details: err.details,
+          });
+          errorMessage = currentLang === 'uz'
+            ? 'Maqolalar filtrlash qoidalariga mos kelmadi (422).'
+            : currentLang === 'en'
+            ? 'Articles did not pass validation rules (422).'
+            : 'Статьи не прошли проверку правил (422).';
         } else {
           errorMessage = currentLang === 'uz'
             ? 'Maqolalarni yuklashda xatolik. Sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'

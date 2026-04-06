@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import DOMPurify from 'dompurify';
 import { useLanguage } from '../context/LanguageContext';
 import { fetchArticleBySlug, extractTextFromHTML } from '../utils/articlesApi';
 
@@ -29,9 +30,23 @@ const ArticlePost = () => {
         }
       } catch (err) {
         console.error('Failed to load article:', err);
+        if (err?.status === 422) {
+          console.error('Article validation error:', {
+            code: err.code,
+            message: err.message,
+            details: err.details,
+          });
+        }
         const currentLang = lang || language;
         if (err.message && err.message.includes('404')) {
           setError('not_found');
+        } else if (err?.status === 422) {
+          const validationMessage = currentLang === 'uz'
+            ? 'Maqola talablarga mos kelmadi (422). Iltimos, keyinroq qayta urinib ko‘ring.'
+            : currentLang === 'en'
+            ? 'Article did not pass validation (422). Please try again later.'
+            : 'Статья не прошла проверку (422). Пожалуйста, попробуйте позже.';
+          setError(validationMessage);
         } else {
           const errorMessage = currentLang === 'uz'
             ? 'Maqolani yuklashda xatolik. Sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
@@ -215,7 +230,16 @@ const ArticlePost = () => {
   }
 
   const body = article.body || article.content || '';
+  const sanitizedBody = body.includes('<') && body.includes('>')
+    ? DOMPurify.sanitize(body)
+    : '';
   const imageUrls = getAllImageUrls();
+  const sourceUrl = article?.source_url;
+  const sourceLabel = language === 'uz'
+    ? 'Asl manba'
+    : language === 'en'
+    ? 'Original source'
+    : 'Оригинальный источник';
 
   return (
     <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24 overflow-x-hidden">
@@ -353,7 +377,7 @@ const ArticlePost = () => {
               style={{ lineHeight: '1.8', letterSpacing: '0.01em' }}
             >
               {body.includes('<') && body.includes('>') ? (
-                <div className="min-w-0 break-words" dangerouslySetInnerHTML={{ __html: body }} />
+                <div className="min-w-0 break-words" dangerouslySetInnerHTML={{ __html: sanitizedBody }} />
               ) : (
                 <div className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-white leading-relaxed whitespace-pre-line space-y-6 min-w-0 break-words">
                   {body.split('\n\n').map((paragraph, index) => (
@@ -363,6 +387,19 @@ const ArticlePost = () => {
                   ))}
                 </div>
               )}
+            </div>
+          )}
+
+          {sourceUrl && (
+            <div className="mb-10">
+              <a
+                href={sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="text-sm text-primary hover:underline"
+              >
+                {sourceLabel}
+              </a>
             </div>
           )}
 

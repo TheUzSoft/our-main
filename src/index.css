@@ -232,3 +232,9 @@
   border-left-color: #1476FF;
   color: #9ca3af;
 }
+
+.article-attribution {
+  opacity: 0.55;
+  font-size: 0.82rem;
+  margin-top: 2rem;
+}

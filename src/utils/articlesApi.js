@@ -3,9 +3,30 @@ const API_BASE_URL = 'https://api.theuzsoft.uz/api';
 const normalizeArticlesListResponse = (payload) => {
   if (!payload) return { items: [], meta: null };
   if (Array.isArray(payload)) return { items: payload, meta: null };
-  const items = Array.isArray(payload.data) ? payload.data : (Array.isArray(payload.items) ? payload.items : []);
-  const meta = payload.meta || payload.pagination || null;
+
+  const envelope = payload?.data && typeof payload.data === 'object' && !Array.isArray(payload.data)
+    ? payload.data
+    : payload;
+  const items = Array.isArray(envelope.data) ? envelope.data : (Array.isArray(envelope.items) ? envelope.items : []);
+  const meta = envelope.meta || envelope.pagination || payload.meta || payload.pagination || null;
   return { items, meta };
+};
+
+const buildApiError = async (response, fallbackMessage) => {
+  let payload = null;
+  try {
+    payload = await response.json();
+  } catch {
+    payload = null;
+  }
+
+  const message = payload?.message || fallbackMessage || `HTTP ${response.status}`;
+  const error = new Error(message);
+  error.status = response.status;
+  error.code = payload?.code || (response.status === 422 ? 'VALIDATION_ERROR' : null);
+  error.details = payload?.errors || null;
+  error.payload = payload;
+  return error;
 };
 
 /**
@@ -35,14 +56,18 @@ export const fetchArticles = async (params = 'uz') => {
 
     if (!response.ok) {
       if (response.status === 404) {
-        throw new Error('404: Articles not found');
-      } else if (response.status === 500) {
-        throw new Error('500: Server error');
-      } else if (response.status >= 400 && response.status < 500) {
-        throw new Error(`HTTP ${response.status}: Client error`);
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw await buildApiError(response, '404: Articles not found');
       }
+      if (response.status === 500) {
+        throw await buildApiError(response, '500: Server error');
+      }
+      if (response.status === 422) {
+        throw await buildApiError(response, '422: Validation failed');
+      }
+      if (response.status >= 400 && response.status < 500) {
+        throw await buildApiError(response, `HTTP ${response.status}: Client error`);
+      }
+      throw await buildApiError(response, `HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
@@ -74,15 +99,21 @@ export const fetchArticleBySlug = async (slug, lang = 'uz') => {
         return null;
       }
       if (response.status === 500) {
-        throw new Error('500: Server error');
-      } else if (response.status >= 400 && response.status < 500) {
-        throw new Error(`HTTP ${response.status}: Client error`);
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw await buildApiError(response, '500: Server error');
       }
+      if (response.status === 422) {
+        throw await buildApiError(response, '422: Validation failed');
+      }
+      if (response.status >= 400 && response.status < 500) {
+        throw await buildApiError(response, `HTTP ${response.status}: Client error`);
+      }
+      throw await buildApiError(response, `HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+    if (data && typeof data === 'object' && data.status && data.data) {
+      return data.data;
+    }
     return data.data || data;
   } catch (error) {
     console.error('Error fetching article:', error);
