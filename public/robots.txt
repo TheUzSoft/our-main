@@ -1,5 +1,5 @@
 # robots.txt for TheUzSoft - IT Company Website
-# https://theuzsoft.uz/robots.txt
+# https://theuzsoft.uz/robots.txt 
 
 User-agent: *
 Allow: /
