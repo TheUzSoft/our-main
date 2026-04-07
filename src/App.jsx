@@ -11,8 +11,8 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
-import ArticlesList from './components/ArticlesList';
-import ArticlePost from './components/ArticlePost';
+// import ArticlesList from './components/ArticlesList'; // Temporarily disabled
+// import ArticlePost from './components/ArticlePost'; // Temporarily disabled
 import SEOHead from './components/SEOHead';
 import { LanguageProvider } from './context/LanguageContext';
 import { DarkModeProvider } from './context/DarkModeContext';
@@ -68,27 +68,27 @@ const BlogPostLayout = () => {
   );
 };
 
-const ArticlesLayout = () => {
-  return (
-    <div className="App">
-      <SEOHead />
-      <Header />
-      <ArticlesList />
-      <Footer />
-    </div>
-  );
-};
-
-const ArticlePostLayout = () => {
-  return (
-    <div className="App">
-      <SEOHead />
-      <Header />
-      <ArticlePost />
-      <Footer />
-    </div>
-  );
-};
+// const ArticlesLayout = () => {
+//   return (
+//     <div className="App">
+//       <SEOHead />
+//       <Header />
+//       <ArticlesList />
+//       <Footer />
+//     </div>
+//   );
+// };
+//
+// const ArticlePostLayout = () => {
+//   return (
+//     <div className="App">
+//       <SEOHead />
+//       <Header />
+//       <ArticlePost />
+//       <Footer />
+//     </div>
+//   );
+// };
 
 function App() {
   return (
@@ -117,8 +117,8 @@ function App() {
           </LanguageProvider>
         } />
 
-        {/* Articles routes */}
-        <Route path="/:lang/articles" element={
+        {/* Articles routes temporarily disabled */}
+        {/* <Route path="/:lang/articles" element={
           <LanguageProvider>
             <ArticlesLayout />
           </LanguageProvider>
@@ -127,7 +127,7 @@ function App() {
           <LanguageProvider>
             <ArticlePostLayout />
           </LanguageProvider>
-        } />
+        } /> */}
         
         {/* Catch all - redirect to /ru */}
         <Route path="*" element={<Navigate to="/ru" replace />} />
