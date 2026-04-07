@@ -3,6 +3,7 @@ name: React CI/CD
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -25,6 +26,12 @@ jobs:
         run: npm run build
         env:
           CI: false
+
+      - name: Verify dist output
+        run: |
+          echo "Build output:"
+          ls -la
+          ls -la dist
 
       - name: Deploy via SCP
         uses: appleboy/scp-action@v0.1.7
