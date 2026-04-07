@@ -1,9 +1,13 @@
-name: React CI/CD.
+name: Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
