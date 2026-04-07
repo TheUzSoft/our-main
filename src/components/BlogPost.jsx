@@ -106,6 +106,24 @@ const BlogPost = () => {
         en: 'en_US'
       };
       updateOGTag('og:locale', localeMap[currentLang] || 'ru_RU');
+      updateOGTag('og:image:width', '1200');
+      updateOGTag('og:image:height', '630');
+      updateOGTag('og:image:alt', blog.title || 'TheUzSoft Blog');
+
+      // Twitter Card
+      const updateTwitter = (name, content) => {
+        let tag = document.querySelector(`meta[name="${name}"]`);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute('name', name);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', content);
+      };
+      updateTwitter('twitter:card', 'summary_large_image');
+      updateTwitter('twitter:title', `${blog.title} | TheUzSoft`);
+      updateTwitter('twitter:description', description);
+      updateTwitter('twitter:image', ogImage);
 
       // Update canonical
       let canonical = document.querySelector('link[rel="canonical"]');
@@ -115,7 +133,48 @@ const BlogPost = () => {
         document.head.appendChild(canonical);
       }
       canonical.setAttribute('href', `${baseUrl}/${currentLang}/blog/${slug}`);
+
+      // Article JSON-LD schema
+      const existingLd = document.getElementById('article-ld-json');
+      if (existingLd) existingLd.remove();
+      const ldScript = document.createElement('script');
+      ldScript.id = 'article-ld-json';
+      ldScript.type = 'application/ld+json';
+      ldScript.text = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: blog.title,
+        description: description,
+        image: ogImage,
+        url: `${baseUrl}/${currentLang}/blog/${slug}`,
+        datePublished: blog.created_at || blog.date || undefined,
+        dateModified: blog.updated_at || blog.created_at || undefined,
+        author: {
+          '@type': 'Organization',
+          name: 'TheUzSoft',
+          url: 'https://theuzsoft.uz',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'TheUzSoft',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://theuzsoft.uz/logo.png',
+          },
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${baseUrl}/${currentLang}/blog/${slug}`,
+        },
+        inLanguage: currentLang,
+      });
+      document.head.appendChild(ldScript);
     }
+
+    return () => {
+      const ld = document.getElementById('article-ld-json');
+      if (ld) ld.remove();
+    };
   }, [blog, slug, lang, language]);
 
   // Loading state

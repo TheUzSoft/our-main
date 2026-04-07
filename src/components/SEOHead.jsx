@@ -1,101 +1,113 @@
 import { useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
+const BASE_URL = 'https://theuzsoft.uz';
+
+const SEO_DATA = {
+  uz: {
+    title: 'TheUzSoft - IT Kompaniya Toshkent | Veb-saytlar, Mobil Ilovalar, CRM, Telegram Bot',
+    description: "TheUzSoft — O'zbekistondagi professional IT kompaniya. Veb-saytlar, mobil ilovalar (Android/iOS), CRM tizimlar, Telegram botlar va AI loyihalar. Bepul konsultatsiya.",
+    locale: 'uz_UZ',
+    htmlLang: 'uz',
+  },
+  ru: {
+    title: 'TheUzSoft - IT Компания Ташкент | Сайты, Мобильные Приложения, CRM, Telegram Боты',
+    description: 'TheUzSoft — профессиональная IT компания в Узбекистане. Веб-сайты, мобильные приложения (Android/iOS), CRM системы, Telegram боты и AI проекты. Бесплатная консультация.',
+    locale: 'ru_RU',
+    htmlLang: 'ru',
+  },
+  en: {
+    title: 'TheUzSoft - IT Company Tashkent | Websites, Mobile Apps, CRM, Telegram Bots',
+    description: 'TheUzSoft — professional IT company in Uzbekistan. Websites, mobile apps (Android/iOS), CRM systems, Telegram bots and AI projects. Free consultation.',
+    locale: 'en_US',
+    htmlLang: 'en',
+  },
+};
+
+const setMeta = (selector, attr, value) => {
+  let el = document.querySelector(selector);
+  if (!el) {
+    el = document.createElement('meta');
+    const parts = selector.match(/\[(\w+)="([^"]+)"\]/g) || [];
+    parts.forEach((part) => {
+      const [, k, v] = part.match(/\[(\w+)="([^"]+)"\]/);
+      el.setAttribute(k, v);
+    });
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attr, value);
+};
+
+const setLink = (selector, attr, value) => {
+  let el = document.querySelector(selector);
+  if (!el) {
+    el = document.createElement('link');
+    const parts = selector.match(/\[(\w+)="([^"]+)"\]/g) || [];
+    parts.forEach((part) => {
+      const [, k, v] = part.match(/\[(\w+)="([^"]+)"\]/);
+      el.setAttribute(k, v);
+    });
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attr, value);
+};
+
 const SEOHead = () => {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
 
   useEffect(() => {
-    // Update document title
-    const titles = {
-      uz: 'TheUzSoft - Zamonaviy IT Yechimlar | Veb-saytlar, Mobil Ilovalar, Telegram Botlar',
-      ru: 'TheUzSoft - Современные IT Решения | Веб-сайты, Мобильные Приложения, Telegram Боты',
-      en: 'TheUzSoft - Modern IT Solutions | Websites, Mobile Apps, Telegram Bots'
-    };
+    const seo = SEO_DATA[language] || SEO_DATA.ru;
+    const ogImage = `${BASE_URL}/logo.png`;
+    const pageUrl = `${BASE_URL}/${language}/`;
 
-    const descriptions = {
-      uz: 'TheUzSoft - O\'zbekistondagi professional IT kompaniya. Veb-saytlar, mobil ilovalar, Telegram botlar va AI loyihalar yaratish xizmatlari.',
-      ru: 'TheUzSoft - профессиональная IT компания в Узбекистане. Услуги по созданию веб-сайтов, мобильных приложений, Telegram ботов и AI проектов.',
-      en: 'TheUzSoft - professional IT company in Uzbekistan. Services for creating websites, mobile applications, Telegram bots and AI projects.'
-    };
+    // html lang
+    document.documentElement.lang = seo.htmlLang;
 
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+    // title
+    document.title = seo.title;
 
-    document.title = titles[language] || titles.uz;
-    
-    // Update meta description
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', descriptions[language] || descriptions.uz);
+    // description
+    setMeta('meta[name="description"]', 'content', seo.description);
 
-    // Update Open Graph tags
-    const updateOGTag = (property, content) => {
-      let tag = document.querySelector(`meta[property="${property}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', property);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    };
+    // Open Graph
+    setMeta('meta[property="og:title"]',       'content', seo.title);
+    setMeta('meta[property="og:description"]',  'content', seo.description);
+    setMeta('meta[property="og:type"]',         'content', 'website');
+    setMeta('meta[property="og:url"]',          'content', pageUrl);
+    setMeta('meta[property="og:image"]',        'content', ogImage);
+    setMeta('meta[property="og:image:width"]',  'content', '1200');
+    setMeta('meta[property="og:image:height"]', 'content', '630');
+    setMeta('meta[property="og:image:alt"]',    'content', 'TheUzSoft - IT Kompaniya Toshkent');
+    setMeta('meta[property="og:site_name"]',    'content', 'TheUzSoft');
+    setMeta('meta[property="og:locale"]',       'content', seo.locale);
 
-    updateOGTag('og:title', titles[language] || titles.uz);
-    updateOGTag('og:description', descriptions[language] || descriptions.uz);
-    updateOGTag('og:type', 'website');
-    const localeMap = {
-      uz: 'uz_UZ',
-      ru: 'ru_RU',
-      en: 'en_US'
-    };
-    updateOGTag('og:locale', localeMap[language] || 'ru_RU');
-    updateOGTag('og:url', `${baseUrl}/${language}/`);
-    updateOGTag('og:image', `${baseUrl}/logo.png`);
-    updateOGTag('og:site_name', 'TheUzSoft');
+    // og:locale:alternate — remove old ones, add fresh
+    document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((el) => el.remove());
+    Object.entries(SEO_DATA)
+      .filter(([lang]) => lang !== language)
+      .forEach(([, data]) => {
+        const el = document.createElement('meta');
+        el.setAttribute('property', 'og:locale:alternate');
+        el.setAttribute('content', data.locale);
+        document.head.appendChild(el);
+      });
 
-    // Update Twitter Card
-    const updateTwitterTag = (name, content) => {
-      let tag = document.querySelector(`meta[name="${name}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    };
+    // Twitter Card
+    setMeta('meta[name="twitter:card"]',        'content', 'summary_large_image');
+    setMeta('meta[name="twitter:site"]',        'content', '@theuzsoft');
+    setMeta('meta[name="twitter:title"]',       'content', seo.title);
+    setMeta('meta[name="twitter:description"]', 'content', seo.description);
+    setMeta('meta[name="twitter:image"]',       'content', ogImage);
+    setMeta('meta[name="twitter:image:alt"]',   'content', 'TheUzSoft - IT Kompaniya Toshkent');
 
-    updateTwitterTag('twitter:card', 'summary_large_image');
-    updateTwitterTag('twitter:title', titles[language] || titles.uz);
-    updateTwitterTag('twitter:description', descriptions[language] || descriptions.uz);
-    updateTwitterTag('twitter:image', `${baseUrl}/logo.png`);
+    // Canonical
+    setLink('link[rel="canonical"]', 'href', pageUrl);
 
-    // Update canonical URL
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', `${baseUrl}/${language}/`);
-
-    // Update alternate language links
-    const updateAlternate = (lang, href) => {
-      let alternate = document.querySelector(`link[rel="alternate"][hreflang="${lang}"]`);
-      if (!alternate) {
-        alternate = document.createElement('link');
-        alternate.setAttribute('rel', 'alternate');
-        alternate.setAttribute('hreflang', lang);
-        document.head.appendChild(alternate);
-      }
-      alternate.setAttribute('href', href);
-    };
-
-    updateAlternate('uz', `${baseUrl}/uz/`);
-    updateAlternate('ru', `${baseUrl}/ru/`);
-    updateAlternate('en', `${baseUrl}/en/`);
-    updateAlternate('x-default', `${baseUrl}/ru/`);
+    // Hreflang alternates
+    setLink('link[rel="alternate"][hreflang="uz"]',        'href', `${BASE_URL}/uz/`);
+    setLink('link[rel="alternate"][hreflang="ru"]',        'href', `${BASE_URL}/ru/`);
+    setLink('link[rel="alternate"][hreflang="en"]',        'href', `${BASE_URL}/en/`);
+    setLink('link[rel="alternate"][hreflang="x-default"]', 'href', `${BASE_URL}/ru/`);
 
   }, [language]);
 
