@@ -11,8 +11,8 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
-// import ArticlesList from './components/ArticlesList'; // Temporarily disabled
-// import ArticlePost from './components/ArticlePost'; // Temporarily disabled
+import ArticlesList from './components/ArticlesList';
+import ArticlePost from './components/ArticlePost';
 import SEOHead from './components/SEOHead';
 import { LanguageProvider } from './context/LanguageContext';
 import { DarkModeProvider } from './context/DarkModeContext';
@@ -68,27 +68,39 @@ const BlogPostLayout = () => {
   );
 };
 
-// const ArticlesLayout = () => {
-//   return (
-//     <div className="App">
-//       <SEOHead />
-//       <Header />
-//       <ArticlesList />
-//       <Footer />
-//     </div>
-//   );
-// };
-//
-// const ArticlePostLayout = () => {
-//   return (
-//     <div className="App">
-//       <SEOHead />
-//       <Header />
-//       <ArticlePost />
-//       <Footer />
-//     </div>
-//   );
-// };
+const ArticlesLayout = () => {
+  return (
+    <div className="App">
+      <SEOHead />
+      <Header />
+      <ArticlesList />
+      <Footer />
+    </div>
+  );
+};
+
+const ArticlePostLayout = () => {
+  return (
+    <div className="App">
+      <SEOHead />
+      <Header />
+      <ArticlePost />
+      <Footer />
+    </div>
+  );
+};
+
+const RedirectArticlesListToNews = () => {
+  const { lang } = useParams();
+  const safe = lang && ['uz', 'ru', 'en'].includes(lang) ? lang : 'ru';
+  return <Navigate to={`/${safe}/news`} replace />;
+};
+
+const RedirectArticlesPostToNews = () => {
+  const { lang, slug } = useParams();
+  const safe = lang && ['uz', 'ru', 'en'].includes(lang) ? lang : 'ru';
+  return <Navigate to={`/${safe}/news/${slug}`} replace />;
+};
 
 function App() {
   return (
@@ -117,17 +129,26 @@ function App() {
           </LanguageProvider>
         } />
 
-        {/* Articles routes temporarily disabled */}
-        {/* <Route path="/:lang/articles" element={
+        <Route path="/:lang/news" element={
           <LanguageProvider>
             <ArticlesLayout />
           </LanguageProvider>
         } />
-        <Route path="/:lang/articles/:slug" element={
+        <Route path="/:lang/news/:slug" element={
           <LanguageProvider>
             <ArticlePostLayout />
           </LanguageProvider>
-        } /> */}
+        } />
+        <Route path="/:lang/articles" element={
+          <LanguageProvider>
+            <RedirectArticlesListToNews />
+          </LanguageProvider>
+        } />
+        <Route path="/:lang/articles/:slug" element={
+          <LanguageProvider>
+            <RedirectArticlesPostToNews />
+          </LanguageProvider>
+        } />
         
         {/* Catch all - redirect to /ru */}
         <Route path="*" element={<Navigate to="/ru" replace />} />

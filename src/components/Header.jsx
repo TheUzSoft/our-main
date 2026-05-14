@@ -54,7 +54,7 @@ const Header = () => {
     { key: 'clients', href: '#clients' },
     { key: 'about', href: '#about' },
     { key: 'blog', href: '/blog', isRoute: true },
-    // { key: 'articles', href: '/articles', isRoute: true }, // Temporarily hidden
+    { key: 'news', href: '/news', isRoute: true },
     { key: 'contact', href: '#contact' },
   ];
 
@@ -170,7 +170,11 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-0.5" aria-label="Main navigation">
             {navItems.map((item) => {
-              const isActive = activeSection === item.key || (item.isRoute && item.key === 'blog' && location.pathname.includes('/blog'));
+              const routeActive =
+                item.isRoute &&
+                ((item.key === 'blog' && location.pathname.includes('/blog')) ||
+                  (item.key === 'news' && location.pathname.includes('/news')));
+              const isActive = activeSection === item.key || routeActive;
               return (
                 <a
                   key={item.key}
@@ -307,7 +311,11 @@ const Header = () => {
             >
               <nav className="py-2 space-y-0.5" aria-label="Mobile navigation">
                 {navItems.map((item, index) => {
-                  const isActive = activeSection === item.key || (item.isRoute && item.key === 'blog' && location.pathname.includes('/blog'));
+                  const routeActive =
+                    item.isRoute &&
+                    ((item.key === 'blog' && location.pathname.includes('/blog')) ||
+                      (item.key === 'news' && location.pathname.includes('/news')));
+                  const isActive = activeSection === item.key || routeActive;
                   return (
                     <motion.a
                       key={item.key}

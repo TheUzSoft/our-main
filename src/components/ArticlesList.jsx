@@ -31,13 +31,13 @@ const ArticlesList = () => {
       } catch (err) {
         console.error('Failed to load articles:', err);
         const currentLang = lang || language;
-        let errorMessage = 'Failed to load articles';
+        let errorMessage = 'Failed to load news';
         if (err.message && err.message.includes('404')) {
           errorMessage = currentLang === 'uz'
-            ? 'Maqolalar topilmadi'
+            ? 'Yangiliklar topilmadi'
             : currentLang === 'en'
-            ? 'Articles not found'
-            : 'Статьи не найдены';
+            ? 'News not found'
+            : 'Новости не найдены';
         } else if (err.message && (err.message.includes('Network') || err.message.includes('fetch'))) {
           errorMessage = currentLang === 'uz'
             ? 'Internet aloqasi bilan muammo. Iltimos, internet aloqasini tekshiring.'
@@ -51,16 +51,16 @@ const ArticlesList = () => {
             details: err.details,
           });
           errorMessage = currentLang === 'uz'
-            ? 'Maqolalar filtrlash qoidalariga mos kelmadi (422).'
+            ? 'Yangiliklar filtrlash qoidalariga mos kelmadi (422).'
             : currentLang === 'en'
-            ? 'Articles did not pass validation rules (422).'
-            : 'Статьи не прошли проверку правил (422).';
+            ? 'News did not pass validation rules (422).'
+            : 'Новости не прошли проверку правил (422).';
         } else {
           errorMessage = currentLang === 'uz'
-            ? 'Maqolalarni yuklashda xatolik. Sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
+            ? 'Yangiliklarni yuklashda xatolik. Sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
             : currentLang === 'en'
-            ? 'An error occurred while loading articles. Please refresh or try again later.'
-            : 'Произошла ошибка при загрузке статей. Обновите страницу или попробуйте позже.';
+            ? 'An error occurred while loading news. Please refresh or try again later.'
+            : 'Произошла ошибка при загрузке новостей. Обновите страницу или попробуйте позже.';
         }
         setError(errorMessage);
         setArticles([]);
@@ -80,15 +80,15 @@ const ArticlesList = () => {
   useEffect(() => {
     const currentLang = lang || language;
     const title = currentLang === 'uz'
-      ? 'Maqolalar | TheUzSoft'
+      ? 'Yangiliklar | TheUzSoft'
       : currentLang === 'en'
-      ? 'Articles | TheUzSoft'
-      : 'Статьи | TheUzSoft';
+      ? 'News | TheUzSoft'
+      : 'Новости | TheUzSoft';
     const description = currentLang === 'uz'
-      ? 'Foydali maqolalar va materiallar. TheUzSoft.'
+      ? 'TheUzSoft yangiliklari va foydali materiallar.'
       : currentLang === 'en'
-      ? 'Useful articles and materials. TheUzSoft.'
-      : 'Полезные статьи и материалы. TheUzSoft.';
+      ? 'TheUzSoft news and useful materials.'
+      : 'Новости и материалы TheUzSoft.';
 
     document.title = title;
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -112,7 +112,7 @@ const ArticlesList = () => {
     updateOGTag('og:title', title);
     updateOGTag('og:description', description);
     updateOGTag('og:type', 'website');
-    updateOGTag('og:url', `${baseUrl}/${currentLang}/articles`);
+    updateOGTag('og:url', `${baseUrl}/${currentLang}/news`);
     updateOGTag('og:image', `${baseUrl}/logo.png`);
 
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -121,7 +121,7 @@ const ArticlesList = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', `${baseUrl}/${currentLang}/articles`);
+    canonical.setAttribute('href', `${baseUrl}/${currentLang}/news`);
   }, [lang, language]);
 
   const containerVariants = {
@@ -199,7 +199,7 @@ const ArticlesList = () => {
         {articles.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400 text-lg">
-              {language === 'uz' ? 'Maqolalar topilmadi' : language === 'en' ? 'No articles found' : 'Статьи не найдены'}
+              {language === 'uz' ? 'Yangiliklar topilmadi' : language === 'en' ? 'No news found' : 'Новости не найдены'}
             </p>
           </div>
         ) : (
@@ -222,7 +222,7 @@ const ArticlesList = () => {
                   className="group relative bg-white dark:bg-[#14151b] rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary transition-all duration-300 overflow-hidden md:hover:shadow-lg"
                 >
                   {imageUrl && (
-                    <Link to={`/${lang || language}/articles/${article.slug}`} className="block aspect-[16/10] overflow-hidden">
+                    <Link to={`/${lang || language}/news/${article.slug}`} className="block aspect-[16/10] overflow-hidden">
                       <img
                         src={imageUrl}
                         alt={article.title}
@@ -233,7 +233,7 @@ const ArticlesList = () => {
                   )}
                   <div className="p-6 sm:p-7 md:p-8">
                     <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-3 group-hover:text-primary transition-colors duration-200 line-clamp-2">
-                      <Link to={`/${lang || language}/articles/${article.slug}`}>
+                      <Link to={`/${lang || language}/news/${article.slug}`}>
                         {article.title}
                       </Link>
                     </h2>
@@ -243,7 +243,7 @@ const ArticlesList = () => {
                       </p>
                     )}
                     <Link
-                      to={`/${lang || language}/articles/${article.slug}`}
+                      to={`/${lang || language}/news/${article.slug}`}
                       className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group-hover:text-primary/80 transition-colors"
                     >
                       {t('articles.readMore')}

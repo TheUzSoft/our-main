@@ -42,17 +42,17 @@ const ArticlePost = () => {
           setError('not_found');
         } else if (err?.status === 422) {
           const validationMessage = currentLang === 'uz'
-            ? 'Maqola talablarga mos kelmadi (422). Iltimos, keyinroq qayta urinib ko‘ring.'
+            ? 'Yangilik talablarga mos kelmadi (422). Iltimos, keyinroq qayta urinib ko‘ring.'
             : currentLang === 'en'
-            ? 'Article did not pass validation (422). Please try again later.'
-            : 'Статья не прошла проверку (422). Пожалуйста, попробуйте позже.';
+            ? 'News item did not pass validation (422). Please try again later.'
+            : 'Новость не прошла проверку (422). Пожалуйста, попробуйте позже.';
           setError(validationMessage);
         } else {
           const errorMessage = currentLang === 'uz'
-            ? 'Maqolani yuklashda xatolik. Sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
+            ? 'Yangilikni yuklashda xatolik. Sahifani yangilang yoki keyinroq qayta urinib ko\'ring.'
             : currentLang === 'en'
-            ? 'An error occurred while loading the article. Please refresh or try again later.'
-            : 'Произошла ошибка при загрузке статьи. Обновите страницу или попробуйте позже.';
+            ? 'An error occurred while loading the news. Please refresh or try again later.'
+            : 'Произошла ошибка при загрузке новости. Обновите страницу или попробуйте позже.';
           setError(errorMessage);
         }
         setArticle(null);
@@ -120,7 +120,7 @@ const ArticlePost = () => {
       updateOGTag('og:title', `${article.title} | TheUzSoft`);
       updateOGTag('og:description', description);
       updateOGTag('og:type', 'article');
-      updateOGTag('og:url', `${baseUrl}/${currentLang}/articles/${slug}`);
+      updateOGTag('og:url', `${baseUrl}/${currentLang}/news/${slug}`);
       updateOGTag('og:image', ogImage);
 
       let canonical = document.querySelector('link[rel="canonical"]');
@@ -129,7 +129,7 @@ const ArticlePost = () => {
         canonical.setAttribute('rel', 'canonical');
         document.head.appendChild(canonical);
       }
-      canonical.setAttribute('href', `${baseUrl}/${currentLang}/articles/${slug}`);
+      canonical.setAttribute('href', `${baseUrl}/${currentLang}/news/${slug}`);
     }
   }, [article, slug, lang, language]);
 
@@ -184,17 +184,17 @@ const ArticlePost = () => {
       <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center pt-32 md:pt-40">
         <div className="container mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">
-            {language === 'uz' ? 'Maqola topilmadi' : language === 'en' ? 'Article not found' : 'Статья не найдена'}
+            {language === 'uz' ? 'Yangilik topilmadi' : language === 'en' ? 'News not found' : 'Новость не найдена'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
             {language === 'uz'
-              ? 'Kechirasiz, siz qidirayotgan maqola topilmadi.'
+              ? 'Kechirasiz, siz qidirayotgan yangilik topilmadi.'
               : language === 'en'
-              ? 'Sorry, the article you are looking for was not found.'
-              : 'Извините, запрашиваемая статья не найдена.'}
+              ? 'Sorry, the news item you are looking for was not found.'
+              : 'Извините, запрашиваемая новость не найдена.'}
           </p>
           <Link
-            to={`/${lang || language}/articles`}
+            to={`/${lang || language}/news`}
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
             {t('articles.backToArticles')}
@@ -219,7 +219,7 @@ const ArticlePost = () => {
             {language === 'uz' ? 'Qayta urinish' : language === 'en' ? 'Try again' : 'Попробовать снова'}
           </button>
           <Link
-            to={`/${lang || language}/articles`}
+            to={`/${lang || language}/news`}
             className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
           >
             {t('articles.backToArticles')}
@@ -251,7 +251,7 @@ const ArticlePost = () => {
           className="mb-8 pt-2 sm:pt-4"
         >
           <Link
-            to={`/${lang || language}/articles`}
+            to={`/${lang || language}/news`}
             className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary transition-colors duration-200 font-medium text-sm sm:text-base"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

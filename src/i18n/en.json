@@ -5,7 +5,7 @@
     "clients": "Clients",
     "about": "About",
     "blog": "Business solutions",
-    "articles": "Articles",
+    "news": "News",
     "contact": "Contact",
     "quickLinks": "Quick Links"
   },
@@ -118,10 +118,10 @@
     "email": "Email"
   },
   "articles": {
-    "title": "Articles",
-    "subtitle": "Useful articles and materials",
+    "title": "News",
+    "subtitle": "Company updates and technology news",
     "readMore": "Read More",
-    "backToArticles": "Back to Articles",
+    "backToArticles": "Back to news",
     "backToHome": "Back to Home",
     "contactUs": "Contact Us",
     "contactUsTitle": "Ready to Start Your Project?",

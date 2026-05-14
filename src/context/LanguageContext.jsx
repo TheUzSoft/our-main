@@ -55,6 +55,10 @@ export const LanguageProvider = ({ children }) => {
     if (currentPath.startsWith('/blog/')) {
       currentPath = '/blog';
     }
+
+    if (currentPath.startsWith('/articles')) {
+      currentPath = currentPath.replace(/^\/articles/, '/news');
+    }
     
     // Navigate to new language path
     const newPath = `/${newLang}${currentPath === '/' ? '' : currentPath}`;

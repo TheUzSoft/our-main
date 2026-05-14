@@ -5,7 +5,7 @@
     "clients": "Mijozlar",
     "about": "Biz haqimizda",
     "blog": "Biznes yechimlar",
-    "articles": "Maqolalar",
+    "news": "Yangiliklar",
     "contact": "Aloqa",
     "quickLinks": "Tezkor havolalar"
   },
@@ -118,10 +118,10 @@
     "email": "Email"
   },
   "articles": {
-    "title": "Maqolalar",
-    "subtitle": "Foydali maqolalar va materiallar",
+    "title": "Yangiliklar",
+    "subtitle": "Kompaniya va texnologiya olamidagi yangiliklar",
     "readMore": "Batafsil",
-    "backToArticles": "Maqolalarga qaytish",
+    "backToArticles": "Yangiliklarga qaytish",
     "backToHome": "Bosh sahifaga qaytish",
     "contactUs": "Bog'lanish",
     "contactUsTitle": "Loyihangizni boshlashga tayyormisiz?",
