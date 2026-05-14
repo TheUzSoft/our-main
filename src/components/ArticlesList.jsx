@@ -222,12 +222,16 @@ const ArticlesList = () => {
                   className="group relative bg-white dark:bg-[#14151b] rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary transition-all duration-300 overflow-hidden md:hover:shadow-lg"
                 >
                   {imageUrl && (
-                    <Link to={`/${lang || language}/news/${article.slug}`} className="block aspect-[16/10] overflow-hidden">
+                    <Link
+                      to={`/${lang || language}/news/${article.slug}`}
+                      className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-900/70 px-3 py-3 sm:px-4 sm:py-4"
+                    >
                       <img
                         src={imageUrl}
                         alt={article.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="max-h-full max-w-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
                         loading="lazy"
+                        decoding="async"
                       />
                     </Link>
                   )}
