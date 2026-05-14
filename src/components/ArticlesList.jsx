@@ -224,12 +224,12 @@ const ArticlesList = () => {
                   {imageUrl && (
                     <Link
                       to={`/${lang || language}/news/${article.slug}`}
-                      className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-900/70 px-3 py-3 sm:px-4 sm:py-4"
+                      className="block w-full overflow-hidden bg-gray-100 dark:bg-gray-900/70"
                     >
                       <img
                         src={imageUrl}
                         alt={article.title}
-                        className="max-h-full max-w-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                        className="mx-auto block h-auto max-h-[min(22rem,52vh)] w-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.01] sm:max-h-[min(24rem,48vh)] md:max-h-[26rem]"
                         loading="lazy"
                         decoding="async"
                       />
