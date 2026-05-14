@@ -180,25 +180,25 @@ const ArticlesList = () => {
   }
 
   return (
-    <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-24">
-      <div className="container mx-auto">
+    <section className="relative bg-white dark:bg-[#14151b] px-4 sm:px-6 lg:px-8 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-16 md:pb-20">
+      <div className="mx-auto w-full max-w-4xl lg:max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-10"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-inter text-black dark:text-white mb-4 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-inter text-black dark:text-white mb-3 tracking-tight">
             {t('articles.title')}
           </h1>
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
             {t('articles.subtitle')}
           </p>
         </motion.div>
 
         {articles.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
+          <div className="text-center py-10">
+            <p className="text-gray-600 dark:text-gray-400 text-base">
               {language === 'uz' ? 'Yangiliklar topilmadi' : language === 'en' ? 'No news found' : 'Новости не найдены'}
             </p>
           </div>
@@ -207,51 +207,51 @@ const ArticlesList = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-5"
           >
             {articles.map((article, index) => {
               const body = article.body || article.content || '';
-              const shortDescription = article.short || extractTextFromHTML(body, 120);
+              const shortDescription = article.short || extractTextFromHTML(body, 100);
               const imageUrl = getImageUrl(article);
 
               return (
                 <motion.article
                   key={article.id || article.slug || index}
                   variants={itemVariants}
-                  whileHover={{ y: -4 }}
-                  className="group relative bg-white dark:bg-[#14151b] rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary transition-all duration-300 overflow-hidden md:hover:shadow-lg"
+                  whileHover={{ y: -2 }}
+                  className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-300 hover:border-primary dark:border-gray-700 dark:bg-[#14151b] md:hover:shadow-md"
                 >
                   {imageUrl && (
                     <Link
                       to={`/${lang || language}/news/${article.slug}`}
-                      className="block w-full overflow-hidden bg-gray-100 dark:bg-gray-900/70"
+                      className="relative block w-full shrink-0 overflow-hidden bg-white leading-[0] dark:bg-white"
                     >
                       <img
                         src={imageUrl}
                         alt={article.title}
-                        className="mx-auto block h-auto max-h-[min(22rem,52vh)] w-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.01] sm:max-h-[min(24rem,48vh)] md:max-h-[26rem]"
+                        className="block h-auto w-full max-h-44 object-contain object-center transition-transform duration-300 group-hover:scale-[1.01] sm:max-h-48 md:max-h-52"
                         loading="lazy"
                         decoding="async"
                       />
                     </Link>
                   )}
-                  <div className="p-6 sm:p-7 md:p-8">
-                    <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-3 group-hover:text-primary transition-colors duration-200 line-clamp-2">
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
+                    <h2 className="text-base sm:text-lg font-bold text-black dark:text-white mb-2 line-clamp-2 transition-colors group-hover:text-primary">
                       <Link to={`/${lang || language}/news/${article.slug}`}>
                         {article.title}
                       </Link>
                     </h2>
                     {shortDescription && (
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm sm:text-base leading-relaxed line-clamp-3">
+                      <p className="mb-3 text-xs text-gray-600 dark:text-gray-400 sm:text-sm leading-relaxed line-clamp-3">
                         {shortDescription}
                       </p>
                     )}
                     <Link
                       to={`/${lang || language}/news/${article.slug}`}
-                      className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group-hover:text-primary/80 transition-colors"
+                      className="mt-auto inline-flex items-center text-sm font-semibold text-primary transition-colors group-hover:text-primary/80"
                     >
                       {t('articles.readMore')}
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
