@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { fetchContacts } from '../utils/contactsApi';
 import ContactInfoList from './ContactInfoList';
+import { trackFormConversion } from '../utils/gtagAds';
 
 const Contact = () => {
   const { t, language } = useLanguage();
@@ -48,21 +49,6 @@ const Contact = () => {
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  // Google Ads Conversion Tracking
-  const gtag_report_conversion = () => {
-    if (typeof window.gtag !== 'undefined') {
-      // Generate unique transaction ID
-      const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-      
-      window.gtag('event', 'conversion', {
-        'send_to': 'AW-17663610609/Y4A2CPfTg78bEPGd1eZB',
-        'value': 1.0,
-        'currency': 'USD',
-        'transaction_id': transactionId
-      });
-    }
   };
 
   const sendToTelegram = async (data) => {
@@ -131,8 +117,7 @@ const Contact = () => {
         setFormData({ name: '', phone: '', message: '' });
         setErrors({});
         
-        // Track Google Ads conversion
-        gtag_report_conversion();
+        trackFormConversion();
         
         // Reset status after 5 seconds
         setTimeout(() => {

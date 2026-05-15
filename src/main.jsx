@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import GoogleAdsTracker from './components/GoogleAdsTracker';
 import ErrorBoundary from './ErrorBoundary';
 import './index.css';
 
@@ -18,6 +19,7 @@ try {
     <React.StrictMode>
       <ErrorBoundary>
         <BrowserRouter>
+          <GoogleAdsTracker />
           <App />
         </BrowserRouter>
       </ErrorBoundary>

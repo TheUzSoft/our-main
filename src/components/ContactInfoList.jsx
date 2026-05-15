@@ -1,5 +1,6 @@
 import { getContactIcon } from '../utils/contactIcons';
-import { buildStaticMapUrl } from '../utils/staticMap';
+import LocationMap from './LocationMap';
+import NonInteractiveMapEmbed from './NonInteractiveMapEmbed';
 
 /**
  * @param {{ items: Array, compact?: boolean }} props
@@ -8,11 +9,13 @@ const ContactInfoList = ({ items, compact = false }) => {
   if (!items?.length) return null;
 
   const addressItem = items.find((item) => item.type === 'address');
-  const staticMapUrl =
-    addressItem?.static_map_url ||
-    (addressItem?.latitude != null && addressItem?.longitude != null
-      ? buildStaticMapUrl(addressItem.latitude, addressItem.longitude, addressItem.map_zoom)
-      : null);
+  const hasCoords =
+    addressItem?.latitude != null &&
+    addressItem?.longitude != null &&
+    !Number.isNaN(Number(addressItem.latitude)) &&
+    !Number.isNaN(Number(addressItem.longitude));
+  const mapEmbed = addressItem?.map_embed;
+  const mapZoom = addressItem?.map_zoom ?? 16;
 
   return (
     <>
@@ -74,18 +77,21 @@ const ContactInfoList = ({ items, compact = false }) => {
         ))}
       </div>
 
-      {staticMapUrl && !compact && (
-        <div
-          className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 relative select-none"
-          aria-label={addressItem?.value || 'Location map'}
-        >
-          <img
-            src={staticMapUrl}
-            alt={addressItem?.value || 'Location map'}
-            className="w-full h-full object-cover pointer-events-none"
-            draggable={false}
-            loading="lazy"
+      {!compact && hasCoords && (
+        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 relative select-none touch-none">
+          <LocationMap
+            latitude={Number(addressItem.latitude)}
+            longitude={Number(addressItem.longitude)}
+            zoom={mapZoom}
+            className="h-full w-full"
+            label={addressItem?.value || 'Location map'}
           />
+        </div>
+      )}
+
+      {!compact && !hasCoords && mapEmbed && (
+        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 relative select-none touch-none">
+          <NonInteractiveMapEmbed src={mapEmbed} title={addressItem?.value || 'Location map'} />
         </div>
       )}
     </>
