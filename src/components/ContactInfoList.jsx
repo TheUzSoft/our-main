@@ -1,4 +1,5 @@
 import { getContactIcon } from '../utils/contactIcons';
+import { buildStaticMapUrl } from '../utils/staticMap';
 
 /**
  * @param {{ items: Array, compact?: boolean }} props
@@ -7,7 +8,11 @@ const ContactInfoList = ({ items, compact = false }) => {
   if (!items?.length) return null;
 
   const addressItem = items.find((item) => item.type === 'address');
-  const mapEmbed = addressItem?.map_embed;
+  const staticMapUrl =
+    addressItem?.static_map_url ||
+    (addressItem?.latitude != null && addressItem?.longitude != null
+      ? buildStaticMapUrl(addressItem.latitude, addressItem.longitude, addressItem.map_zoom)
+      : null);
 
   return (
     <>
@@ -69,17 +74,17 @@ const ContactInfoList = ({ items, compact = false }) => {
         ))}
       </div>
 
-      {mapEmbed && !compact && (
-        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50">
-          <iframe
-            src={mapEmbed}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
+      {staticMapUrl && !compact && (
+        <div
+          className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 relative select-none"
+          aria-label={addressItem?.value || 'Location map'}
+        >
+          <img
+            src={staticMapUrl}
+            alt={addressItem?.value || 'Location map'}
+            className="w-full h-full object-cover pointer-events-none"
+            draggable={false}
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title={addressItem?.value || 'Location map'}
           />
         </div>
       )}
