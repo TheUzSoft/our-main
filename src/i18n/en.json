@@ -95,6 +95,8 @@
     "sending": "Sending...",
     "address": "Address",
     "viewLocation": "View exact location",
+    "openInMaps": "Open in Google Maps",
+    "getDirections": "Directions",
     "success": "Message sent successfully!",
     "error": "An error occurred. Please try again.",
     "errors": {

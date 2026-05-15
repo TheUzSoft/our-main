@@ -95,6 +95,8 @@
     "sending": "Yuborilmoqda...",
     "address": "Manzil",
     "viewLocation": "Aniq lokatsiyani ko'rish",
+    "openInMaps": "Google Xaritada ochish",
+    "getDirections": "Yo'nalish olish",
     "success": "Xabar muvaffaqiyatli yuborildi!",
     "error": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
     "errors": {

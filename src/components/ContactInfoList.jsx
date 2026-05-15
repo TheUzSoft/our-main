@@ -1,6 +1,5 @@
 import { getContactIcon } from '../utils/contactIcons';
-import LocationMap from './LocationMap';
-import NonInteractiveMapEmbed from './NonInteractiveMapEmbed';
+import SiteLocationMap from './SiteLocationMap';
 
 /**
  * @param {{ items: Array, compact?: boolean }} props
@@ -16,6 +15,7 @@ const ContactInfoList = ({ items, compact = false }) => {
     !Number.isNaN(Number(addressItem.longitude));
   const mapEmbed = addressItem?.map_embed;
   const mapZoom = addressItem?.map_zoom ?? 16;
+  const showMap = !compact && (hasCoords || mapEmbed);
 
   return (
     <>
@@ -77,21 +77,16 @@ const ContactInfoList = ({ items, compact = false }) => {
         ))}
       </div>
 
-      {!compact && hasCoords && (
-        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 relative select-none touch-none">
-          <LocationMap
-            latitude={Number(addressItem.latitude)}
-            longitude={Number(addressItem.longitude)}
+      {showMap && (
+        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50">
+          <SiteLocationMap
+            latitude={hasCoords ? Number(addressItem.latitude) : undefined}
+            longitude={hasCoords ? Number(addressItem.longitude) : undefined}
             zoom={mapZoom}
+            address={addressItem?.value || ''}
+            mapEmbed={mapEmbed}
             className="h-full w-full"
-            label={addressItem?.value || 'Location map'}
           />
-        </div>
-      )}
-
-      {!compact && !hasCoords && mapEmbed && (
-        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 relative select-none touch-none">
-          <NonInteractiveMapEmbed src={mapEmbed} title={addressItem?.value || 'Location map'} />
         </div>
       )}
     </>
