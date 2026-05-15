@@ -94,6 +94,7 @@
     "send": "Yuborish",
     "sending": "Yuborilmoqda...",
     "address": "Manzil",
+    "viewLocation": "Aniq lokatsiyani ko'rish",
     "success": "Xabar muvaffaqiyatli yuborildi!",
     "error": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
     "errors": {
