@@ -306,10 +306,7 @@ const Contact = () => {
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
                 </div>
               ) : (
-                <ContactInfoList
-                  items={contactItems}
-                  mapLinkLabel={t('contact.viewLocation')}
-                />
+                <ContactInfoList items={contactItems} />
               )}
             </motion.div>
           </div>

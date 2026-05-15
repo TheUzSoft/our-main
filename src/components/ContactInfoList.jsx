@@ -1,9 +1,9 @@
 import { getContactIcon } from '../utils/contactIcons';
 
 /**
- * @param {{ items: Array, mapLinkLabel?: string, compact?: boolean }} props
+ * @param {{ items: Array, compact?: boolean }} props
  */
-const ContactInfoList = ({ items, mapLinkLabel, compact = false }) => {
+const ContactInfoList = ({ items, compact = false }) => {
   if (!items?.length) return null;
 
   const addressItem = items.find((item) => item.type === 'address');
@@ -64,27 +64,13 @@ const ContactInfoList = ({ items, mapLinkLabel, compact = false }) => {
                   {item.value}
                 </p>
               )}
-              {item.type === 'address' && item.map_link && mapLinkLabel && (
-                <a
-                  href={item.map_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 mt-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  {mapLinkLabel}
-                </a>
-              )}
             </div>
           </div>
         ))}
       </div>
 
       {mapEmbed && !compact && (
-        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div className="mt-6 sm:mt-8 w-full h-56 sm:h-72 md:h-80 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50">
           <iframe
             src={mapEmbed}
             width="100%"
