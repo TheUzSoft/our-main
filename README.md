@@ -223,3 +223,6 @@ All content is fully translatable with URL-based routing. The language system in
 ## 📄 License
 
 © 2024 TheUzSoft. All rights reserved.
+
+
+<!-- Security scan triggered at 2026-09-05 07:28:30 -->
